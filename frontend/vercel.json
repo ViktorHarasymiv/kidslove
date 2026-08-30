@@ -1,0 +1,9 @@
+{
+  "rewrites": [
+    {
+      "source": "/api/:path*",
+      "destination": "https://kidslove.onrender.com/:path*"
+    },
+    { "source": "/(.*)", "destination": "/" }
+  ]
+}
