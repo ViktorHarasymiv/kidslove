@@ -1,0 +1,110 @@
+html,
+body {
+  height: 100%;
+  overflow: hidden;
+}
+
+body {
+  position: relative;
+
+  font-family: var(--head-font-family);
+  color: var(--head-color);
+
+  background-color: #f9f9f9;
+
+  font-size: clamp(0.875rem, 0.8447rem + 0.1294vw, 1rem);
+  line-height: 125%;
+  letter-spacing: -0.03em;
+}
+
+main {
+  height: 100%;
+}
+
+h1 {
+  font-family: var(--font-family);
+  font-weight: 700;
+  font-size: clamp(1.875rem, 1.1165rem + 3.2362vw, 5rem);
+  line-height: 97%;
+  letter-spacing: -0.03em;
+}
+
+.special {
+  font-size: clamp(0.75rem, 0.659rem + 0.3883vw, 1.125rem);
+
+  line-height: 122%;
+  letter-spacing: -0.02em;
+
+  color: var(--secound-color);
+}
+
+/* CUSTOM */
+
+.opacity_text {
+  color: var(--opacity-color);
+}
+
+.accent_text {
+  font-weight: 700;
+  text-decoration: underline;
+  color: var(--head-background-color);
+}
+
+/* SVG ICON */
+
+svg {
+  width: 20px;
+  height: 20px;
+}
+
+/* LOGO */
+
+.logo {
+  margin-right: 120px;
+  width: auto;
+  height: 28px;
+
+  object-fit: contain;
+}
+
+/* BUTTON LINK */
+
+.button_link {
+  padding: var(--padding-b);
+
+  color: var(--secound-color);
+
+  border: var(--border-b);
+  border-radius: var(--border-radius-b);
+
+  justify-content: center;
+}
+
+.light_button_link {
+  color: var(--head-color);
+  border: 1px solid rgba(38, 38, 38, 0.4);
+}
+
+.dark_button_link {
+  color: var(--head-color);
+  border: 1px solid rgba(38, 38, 38, 0.4);
+}
+
+/* Hover — тільки для десктопів */
+
+@media (hover: hover) and (pointer: fine) {
+  .button_link:hover {
+    background-color: var(--secound-color);
+    color: var(--head-background-color);
+  }
+}
+
+/* Active — тільки для мобільних */
+
+@media (hover: none) and (pointer: coarse) {
+  .button_link:active {
+    background-color: var(--head-color);
+    color: var(--head-background-color);
+    transform: scale(0.97);
+  }
+}

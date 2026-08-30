@@ -1,0 +1,36 @@
+:root {
+  /* HEAD */
+  --head-font-family: "Manrope", sans-serif;
+  --head-color: #262626;
+  --head-font-weight: 500;
+  --head-background-color: #f6b83d;
+
+  /* SECOUND */
+  --opacity-color: rgba(255, 255, 255, 0.4);
+  --secound-font-weight: 700;
+  --secound-color: #fff;
+  --secound-background-color: #fff4df;
+
+  /* BLOCK */
+
+  --block-padding: 40px 20px;
+
+  /* INPUT */
+
+  --input-basic: rgba(38, 38, 38, 0.15);
+  --input-success: #08aa83;
+  --input-active: #f6b83d;
+  --input-error: #ef2447;
+
+  --input-padding-inline: 12px;
+
+  /* BUTTON */
+
+  --padding-b: 15px 20px;
+  --border-b: 1px solid rgba(255, 255, 255, 0.4);
+  --border-radius-b: 30px;
+}
+
+#root {
+  height: 100%;
+}

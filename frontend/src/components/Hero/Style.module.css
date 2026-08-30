@@ -1,0 +1,6 @@
+.hero {
+  display: flex;
+  flex-direction: column;
+  height: 100vh; /* повне полотно */
+  width: 100%;
+}

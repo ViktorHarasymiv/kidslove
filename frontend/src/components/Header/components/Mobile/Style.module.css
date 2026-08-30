@@ -1,0 +1,83 @@
+/* MENU */
+
+.mobile_menu {
+  height: 40px;
+
+  display: flex;
+  align-items: center;
+}
+
+/* BUTTON */
+
+.burger {
+  position: relative;
+
+  z-index: 99991;
+
+  width: 36px;
+  height: 36px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 6px;
+
+  background: transparent;
+  border: none;
+
+  cursor: pointer;
+}
+
+.burger span {
+  display: block;
+  height: 2px;
+  background: var(--secound-color);
+  border-radius: 3px;
+  transition:
+    transform 0.3s ease,
+    opacity 0.3s ease;
+}
+
+.dark span {
+  background: var(--head-color);
+}
+
+.open span {
+  background-color: var(--head-color);
+}
+
+/* Анімація відкриття */
+.burger.open span:nth-child(1) {
+  transform: translateY(13px) rotate(45deg);
+}
+
+.burger.open span:nth-child(2) {
+  opacity: 0;
+}
+
+.burger.open span:nth-child(3) {
+  transform: translateY(-9px) rotate(-45deg);
+}
+
+/* MOBILE LIST  */
+
+.mobile_list {
+  padding: 28px 20px 40px;
+
+  width: 60vw;
+  height: 100%;
+
+  position: absolute;
+  z-index: 9999;
+
+  top: 0;
+  bottom: 0;
+
+  right: 0;
+
+  display: flex;
+  flex-direction: column;
+
+  background-color: var(--secound-color);
+  color: var(--head-color);
+}

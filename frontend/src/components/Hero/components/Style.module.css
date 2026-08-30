@@ -1,0 +1,79 @@
+.hero_wrapper_top,
+.hero_wrapper_bottom {
+  overflow: hidden;
+
+  flex: 1; /* 50% / 50% */
+  display: flex;
+
+  border-radius: 60px;
+}
+
+/* FIRST BLOCK */
+
+.hero_wrapper_top {
+  padding: 18px 20px 50px;
+  background-color: var(--head-background-color);
+
+  display: flex;
+  flex-direction: column;
+
+  justify-content: space-between;
+}
+
+.hero_wrapper_top_inside {
+  display: flex;
+  flex-direction: column;
+
+  gap: 32px;
+}
+
+.hero_wrapper_top > h2 {
+  max-width: 100%;
+}
+
+.hero_title {
+  color: var(--secound-color);
+}
+
+/* SECOUND BLOCK */
+
+.hero_wrapper_bottom img {
+  width: 100%;
+  height: 100%;
+  object-position: top;
+  object-fit: cover; /* зображення заповнює всю площу */
+}
+
+@media screen and (min-width: 768px) {
+  .hero_wrapper_top {
+    padding: 27px 32px 44px;
+
+    justify-content: space-between;
+  }
+
+  .hero_wrapper_top_inside {
+    align-items: end;
+  }
+
+  .hero_wrapper_top_inside > h2 {
+    max-width: 255px;
+  }
+}
+
+@media screen and (min-width: 1280px) {
+  .hero_wrapper_top {
+    padding: 16px 64px 32px;
+
+    justify-content: space-between;
+  }
+
+  .hero_wrapper_top_inside {
+    flex-direction: row;
+    flex-wrap: nowrap;
+    gap: 73px;
+  }
+
+  .hero_wrapper_top_inside > h2 {
+    max-width: 255px;
+  }
+}

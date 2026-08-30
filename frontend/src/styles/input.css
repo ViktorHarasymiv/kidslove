@@ -1,0 +1,89 @@
+.input_block {
+  position: relative;
+}
+
+.input {
+  padding: 16px;
+
+  width: 100%;
+
+  border-radius: 30px;
+
+  border: 1px solid rgba(38, 38, 38, 0.15);
+}
+
+.input::placeholder {
+  text-transform: capitalize;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 125%;
+  letter-spacing: -0.03em;
+  color: rgba(38, 38, 38, 0.5);
+}
+
+.input:focus {
+  outline: none;
+  border-color: var(--input-active);
+}
+
+.label {
+  pointer-events: none;
+  display: none;
+  width: 0px;
+  height: 0px;
+  opacity: 0;
+}
+
+.submit_button {
+  margin-top: 32px;
+  width: 100%;
+
+  font-weight: 700;
+  line-height: 125%;
+  letter-spacing: -0.03em;
+  text-transform: uppercase;
+  color: #fff;
+
+  padding: 16px;
+
+  background-color: var(--head-background-color);
+
+  border-radius: 30px;
+
+  border: 1px solid var(--input-active);
+}
+
+.input_error {
+  position: absolute;
+
+  top: 5px;
+  right: 20px;
+
+  font-size: 12px;
+
+  color: var(--input-error);
+}
+
+.error_border {
+  border-color: var(--input-error);
+}
+
+/* Hover — тільки для десктопів */
+
+@media (hover: hover) and (pointer: fine) {
+  .submit_button:hover {
+    background-color: var(--secound-color);
+    color: var(--head-background-color);
+  }
+}
+
+/* Active — тільки для мобільних */
+
+@media (hover: none) and (pointer: coarse) {
+  .submit_button:active {
+    background-color: var(--head-background-color);
+    color: var(--secound-color);
+
+    transform: scale(0.97);
+  }
+}

@@ -1,0 +1,17 @@
+.dark {
+  padding-top: 16px;
+}
+
+.header_wrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* NAVIGATION LIST */
+
+@media screen and (min-width: 1280px) {
+  .dark {
+    padding-inline: 32px;
+  }
+}
