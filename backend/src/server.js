@@ -21,7 +21,7 @@ export const startServer = () => {
 
   app.use(
     cors({
-      origin: ['http://localhost:5173', 'kidslove.vercel.app'],
+      origin: ['http://localhost:5173', 'https://kidslove.vercel.app'],
       credentials: true,
     }),
   );
