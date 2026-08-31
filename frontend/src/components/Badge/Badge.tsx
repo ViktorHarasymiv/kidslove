@@ -107,7 +107,7 @@ export default function Badge() {
 
   // 4. Якщо авторизований і бейдж куплений, але не активований
 
-  if (!isBuy && !isActive) {
+  if (authorized && !isBuy && !isActive) {
     return <IsBuyPage />;
   }
 
