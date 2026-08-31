@@ -1,10 +1,12 @@
-html,
-body {
+html {
   height: 100%;
-  overflow: hidden;
 }
 
 body {
+  min-height: 100%;
+
+  display: flex;
+  flex-direction: column;
   position: relative;
 
   font-family: var(--head-font-family);
@@ -17,8 +19,35 @@ body {
   letter-spacing: -0.03em;
 }
 
+#root {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
 main {
-  height: 100%;
+  display: flex;
+
+  flex: 1;
+}
+
+.block_wrapper {
+  display: flex;
+  flex: 1;
+
+  overflow: hidden;
+
+  margin-top: 26px;
+
+  border-radius: 60px;
+
+  background-color: var(--secound-color);
+}
+
+@media screen and (min-width: 1280px) {
+  .block_wrapper {
+    margin-top: 32px;
+  }
 }
 
 h1 {
@@ -72,6 +101,7 @@ svg {
 .button_link {
   padding: var(--padding-b);
 
+  background-color: var(--head-background-color);
   color: var(--secound-color);
 
   border: var(--border-b);
@@ -80,12 +110,13 @@ svg {
   justify-content: center;
 }
 
-.light_button_link {
+/* .light_button_link {
   color: var(--head-color);
   border: 1px solid rgba(38, 38, 38, 0.4);
-}
+} */
 
 .dark_button_link {
+  background-color: var(--secound-color);
   color: var(--head-color);
   border: 1px solid rgba(38, 38, 38, 0.4);
 }

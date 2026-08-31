@@ -3,6 +3,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import { API_URL } from "../../config/api";
 import axios from "axios";
 import { useAuthStore } from "../../services/store/authStore";
+import IsBuyPage from "./components/isBuy";
 
 export interface BadgeResponse {
   status?:
@@ -104,11 +105,10 @@ export default function Badge() {
 
   const { isBuy, isActive } = data;
 
-  console.log(data);
-
   // 4. Якщо авторизований і бейдж куплений, але не активований
-  if (authorized && !isBuy && !isActive) {
-    return <div>Бейдж не зареєстрований,як проданий!</div>;
+
+  if (!isBuy && !isActive) {
+    return <IsBuyPage />;
   }
 
   // 4. Якщо авторизований і бейдж куплений, але не активований

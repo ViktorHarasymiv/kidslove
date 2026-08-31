@@ -7,6 +7,7 @@
 
   /* SECOUND */
   --opacity-color: rgba(255, 255, 255, 0.4);
+  --opacity-color-dark: rgba(0, 0, 0, 0.4);
   --secound-font-weight: 700;
   --secound-color: #fff;
   --secound-background-color: #fff4df;
@@ -29,8 +30,4 @@
   --padding-b: 15px 20px;
   --border-b: 1px solid rgba(255, 255, 255, 0.4);
   --border-radius-b: 30px;
-}
-
-#root {
-  height: 100%;
 }
