@@ -4,6 +4,7 @@ import { API_URL } from "../../config/api";
 import axios from "axios";
 import { useAuthStore } from "../../services/store/authStore";
 import IsBuyPage from "./components/isBuy";
+import IsActivated from "./components/IsActivated";
 
 export interface BadgeResponse {
   status?:
@@ -31,7 +32,6 @@ export default function Badge() {
 
   const { authorized, loading } = useAuthStore();
   const [data, setData] = useState<BadgeResponse | null>(null);
-  const [code, setCode] = useState("");
 
   // HTTPS
 
@@ -51,31 +51,6 @@ export default function Badge() {
         message: "Помилка при отриманні даних бейджа.",
         isBuy: false,
         isActive: false,
-      };
-    }
-  };
-
-  const activateBadge = async (
-    badgeId: string,
-    userInputCode: string,
-  ): Promise<BadgeResponse> => {
-    try {
-      const res = await axios.post<BadgeResponse>(
-        `${API_URL}/badges/activate`,
-        {
-          badgeId,
-          activationCode: userInputCode,
-        },
-        { withCredentials: true },
-      );
-
-      return res.data;
-    } catch (err) {
-      console.error("Activation error:", err);
-
-      return {
-        status: "error",
-        message: "Помилка активації.",
       };
     }
   };
@@ -107,33 +82,18 @@ export default function Badge() {
 
   // 4. Якщо авторизований і бейдж куплений, але не активований
 
-  if (authorized && !isBuy && !isActive) {
+  if (!isBuy) {
     return <IsBuyPage />;
   }
 
   // 4. Якщо авторизований і бейдж куплений, але не активований
-  if (authorized && isBuy && !isActive) {
-    return (
-      <div>
-        <input
-          type="text"
-          placeholder="Введіть код активації"
-          value={code}
-          onChange={(e) => setCode(e.target.value)}
-        />
-        <button
-          onClick={async () => {
-            const res = await activateBadge(id!, code);
+  if (!isActive) {
+    if (!authorized) {
+      navigation("/zaloguj-się");
+      return null;
+    }
 
-            if (res.status === "activated") {
-              navigation(`/dziecko/stwórz?badgeId=${id}`);
-            }
-          }}
-        >
-          Активувати
-        </button>
-      </div>
-    );
+    return <IsActivated id={id} />;
   }
 
   // 5. Інші стани

@@ -17,4 +17,5 @@ export interface User {
   name: string;
   avatar?: string;
   createdAt: string;
+  badges: string[];
 }
