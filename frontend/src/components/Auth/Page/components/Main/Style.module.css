@@ -1,0 +1,96 @@
+.main_wrapper {
+  padding: 40px;
+  max-width: 520px;
+  width: 100%;
+
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+
+  background-color: var(--secound-color);
+  border-radius: 60px;
+}
+
+.user_wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+
+.user_action_wrapper {
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: space-between;
+}
+
+.set_block,
+.edit_action {
+  cursor: pointer;
+
+  transition: transform 0.2s ease-in;
+}
+
+.set_block:hover,
+.edit_action:hover {
+  transform: scale(1.05);
+}
+
+.form_wrapper {
+  display: flex;
+  flex-direction: column;
+
+  justify-content: center;
+}
+
+.block_title {
+  margin-bottom: 20px;
+}
+
+.form_block {
+}
+
+/* PHOTO PICKER */
+
+.avatar_block {
+  margin-bottom: 20px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  gap: 8px;
+}
+
+.custom_upload_wrapper {
+  overflow: hidden;
+  max-width: fit-content;
+
+  position: relative;
+}
+
+.custom_upload {
+  z-index: 1;
+  position: absolute;
+  opacity: 0;
+}
+
+.custom_upload_text {
+  z-index: 0;
+  position: relative;
+
+  text-decoration: underline;
+}
+
+/* CHILDREN TILE */
+
+.head_wrapper {
+  margin-bottom: 32px;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+
+  align-items: end;
+
+  justify-content: space-between;
+}

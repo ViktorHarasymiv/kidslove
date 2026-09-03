@@ -1,0 +1,16 @@
+.css-sc8y68-MuiInputBase-root-MuiOutlinedInput-root-MuiSelect-root {
+  border-radius: 25px !important;
+}
+
+.css-113d811-MuiFormLabel-root-MuiInputLabel-root.Mui-focused {
+  color: var(--head-background-color) !important;
+}
+
+.css-sc8y68-MuiInputBase-root-MuiOutlinedInput-root-MuiSelect-root.Mui-focused
+  .MuiOutlinedInput-notchedOutline {
+  border-color: var(--head-background-color) !important;
+}
+
+.css-azmgtl-MuiSvgIcon-root-MuiNativeSelect-root-MuiSelect-icon {
+  color: var(--head-background-color) !important;
+}

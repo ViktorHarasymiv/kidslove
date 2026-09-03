@@ -232,6 +232,10 @@ span {
   display: inline-block;
 }
 
+input[type="file" i]::-webkit-file-upload-button {
+  cursor: pointer;
+}
+
 /* Для Chrome, Safari, Edge, Opera */
 input[type="number"]::-webkit-inner-spin-button,
 input[type="number"]::-webkit-outer-spin-button {

@@ -1,0 +1,15 @@
+.section_wrapper {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+
+  gap: 32px;
+
+  flex: 1;
+}
+
+@media screen and (min-width: 1280px) {
+  .section_wrapper {
+    flex-direction: row;
+  }
+}

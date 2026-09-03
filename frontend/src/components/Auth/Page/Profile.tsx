@@ -1,17 +1,16 @@
-import { Link } from "react-router-dom";
 import { useAuthStore } from "../../../services/store/authStore";
+import Main from "./components/Main/Main";
+import TabsPage from "./components/TabsPage/TabsPage";
+
+import style from "./Style.module.css";
+
 export default function Profile() {
   const { user } = useAuthStore();
   if (!user) return;
   return (
-    <div>
-      {user.badges.map((item, index) => {
-        return (
-          <li key={index}>
-            <Link to={`/badge/${item}`}>My badge : {item}</Link>
-          </li>
-        );
-      })}
-    </div>
+    <section className={style.section_wrapper}>
+      <Main />
+      <TabsPage />
+    </section>
   );
 }
