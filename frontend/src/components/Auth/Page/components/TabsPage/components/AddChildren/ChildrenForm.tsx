@@ -140,7 +140,7 @@ export default function ChildrenForm({ badgeId, onSubmit }: Props) {
                       <label className="label">Alergie</label>
 
                       <div className={style.dynamic_list}>
-                        {values.allergies.map((item, index) => (
+                        {values.allergies.map((_, index) => (
                           <div key={index} className={style.dynamic_item}>
                             <Field
                               name={`allergies.${index}`}
