@@ -40,7 +40,7 @@
 
 .user_wrapper {
   display: flex;
-  flex-wrap: nowrap;
+  flex-wrap: wrap;
 
   gap: 8px;
 }

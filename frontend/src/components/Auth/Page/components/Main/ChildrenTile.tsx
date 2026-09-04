@@ -60,7 +60,7 @@ export default function ChildrenTile() {
   if (!user) return;
 
   return (
-    <div>
+    <div className={style.child_wrapper}>
       <div className={style.head_wrapper}>
         <h2>Moje dzieci</h2>
         {/* BADGE SELECT */}

@@ -26,8 +26,6 @@ body {
 }
 
 main {
-  display: flex;
-
   flex: 1;
 }
 
@@ -128,17 +126,26 @@ svg {
 /* TAB */
 
 .tabs_wrapper {
+  width: 100%;
   margin-bottom: 32px;
 
   display: flex;
-
   flex-direction: row;
   flex-wrap: nowrap;
-
   align-items: center;
   gap: 8px;
 
+  overflow-x: auto; /* 🔥 горизонтальний скрол */
+  overflow-y: hidden; /* 🔥 вертикальний не потрібен */
+
+  white-space: nowrap; /* 🔥 елементи не переносяться */
   border-bottom: 1px solid silver;
+
+  scrollbar-width: thin; /* Firefox */
+}
+
+.tabs_wrapper > * {
+  flex-shrink: 0; /* 🔥 не дає елементам стискатися */
 }
 
 .tab_link {
