@@ -1,7 +1,7 @@
 import { Select, MenuItem, FormControl, InputLabel } from "@mui/material";
 
 type Props = {
-  options: string[];
+  options?: string[];
   value: string;
   onChange: (value: string) => void;
   label?: string;
@@ -17,7 +17,7 @@ export function MuiDynamicSelect({ options, value, onChange, label }: Props) {
         label={label}
         onChange={(e) => onChange(e.target.value)}
       >
-        {options.map((opt) => (
+        {options?.map((opt) => (
           <MenuItem key={opt} value={opt}>
             {opt}
           </MenuItem>

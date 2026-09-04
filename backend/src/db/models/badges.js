@@ -37,6 +37,8 @@ const BadgeSchema = new Schema(
       default: null, // до якого замовлення прив’язаний
     },
 
+    childId: { type: String, default: null },
+
     // опційно: дата активації
     activatedAt: {
       type: Date,

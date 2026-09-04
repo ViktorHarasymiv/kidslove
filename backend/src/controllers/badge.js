@@ -1,6 +1,8 @@
 import { BadgeCollection } from '../db/models/badges.js';
 import { ChildCollection } from '../db/models/children.js';
 import { UsersCollection } from '../db/models/user.js';
+import { setActiveBadge } from '../services/badge.js';
+
 // GET BADGE BY ID
 
 export const getBadgeInfo = async (req, res) => {
@@ -51,6 +53,8 @@ export const getBadgeInfo = async (req, res) => {
     // 5. Повернути дані дитини
     return res.json({
       status: 'ok',
+      isBuy: badge.isBuy,
+      isActive: badge.active,
       badgeId,
       child: child,
     });
@@ -66,8 +70,6 @@ export const getBadgeInfo = async (req, res) => {
 // GET ACTIVE
 
 export const activateBadge = async (req, res) => {
-  console.log(req.body);
-
   try {
     const { badgeId, activationCode } = req.body;
     const userId = req.user.id;
@@ -134,3 +136,25 @@ export const activateBadge = async (req, res) => {
     });
   }
 };
+
+// SET ACTIVE BADGE
+
+export async function setActiveBadgeController(req, res) {
+  try {
+    const { badgeId } = req.body;
+
+    if (!badgeId) {
+      return res.status(400).json({ message: 'badgeId is required' });
+    }
+
+    const updatedUser = await setActiveBadge(req, badgeId);
+
+    return res.json({
+      status: 'success',
+      user: updatedUser,
+    });
+  } catch (err) {
+    console.error('Error setting active badge:', err);
+    return res.status(500).json({ message: 'Server error' });
+  }
+}

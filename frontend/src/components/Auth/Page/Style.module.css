@@ -1,4 +1,6 @@
 .section_wrapper {
+  margin-top: 32px;
+
   display: flex;
   flex-direction: column;
   flex-wrap: nowrap;

@@ -1,0 +1,23 @@
+.form_wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+
+  flex: 1;
+}
+
+.form_block {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  justify-content: space-between;
+
+  gap: 80px;
+}
+
+@media screen and (min-width: 767px) {
+  .form_block {
+    flex-direction: row;
+    gap: 60px;
+  }
+}

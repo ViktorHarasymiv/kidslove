@@ -2,7 +2,7 @@ import { Schema, model } from 'mongoose';
 
 const ChildSchema = new Schema(
   {
-    userId: {
+    parentId: {
       type: Schema.Types.ObjectId,
       ref: 'users',
       required: true,
@@ -25,15 +25,9 @@ const ChildSchema = new Schema(
       required: true,
     },
 
-    allergies: {
-      type: [String],
-      default: [],
-    },
+    allergies: { type: [String], default: [] },
 
-    medicalNotes: {
-      type: String,
-      default: '',
-    },
+    medicalNotes: { type: [String], default: [] },
 
     emergencyPhone: {
       type: String,
@@ -53,4 +47,4 @@ const ChildSchema = new Schema(
   { timestamps: true, versionKey: false },
 );
 
-export const ChildCollection = model('children', ChildSchema);
+export const ChildCollection = model('childrens', ChildSchema);

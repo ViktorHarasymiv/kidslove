@@ -25,6 +25,8 @@ const usersSchema = new Schema(
       default: [],
     },
 
+    activeBadgeId: { type: String, default: null },
+
     // ============================================================
   },
   { timestamps: true, versionKey: false },

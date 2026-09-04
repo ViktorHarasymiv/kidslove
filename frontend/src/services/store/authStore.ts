@@ -24,6 +24,7 @@ interface AuthState {
   getLogout: () => Promise<void>;
   fetchUser: () => Promise<User | null>;
   deleteAccountFunc: () => Promise<void>;
+  setActiveBadge: (badgeId: string) => void;
 }
 
 export const useAuthStore = create<AuthState>((set, get) => ({
@@ -130,4 +131,9 @@ export const useAuthStore = create<AuthState>((set, get) => ({
       console.error(err);
     }
   },
+
+  setActiveBadge: (badgeId: string) =>
+    set((state) => ({
+      user: state.user ? { ...state.user, activeBadgeId: badgeId } : null,
+    })),
 }));

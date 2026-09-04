@@ -79,6 +79,7 @@ export default function Badge() {
   }
 
   const { isBuy, isActive } = data;
+  console.log(data);
 
   // 4. Якщо авторизований і бейдж куплений, але не активований
 
