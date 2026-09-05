@@ -4,6 +4,8 @@ import { Router } from 'express';
 import { ctrlWrapper } from '../utils/ctrlWrapper.js';
 import { validateBody } from '../middlewares/validateBody.js';
 
+import { upload } from '../middlewares/multer.js';
+
 import { authMiddleware } from '../middlewares/authMiddleware.js';
 import {
   createChildController,
@@ -20,6 +22,7 @@ router.get('/badge/:badgeId', ctrlWrapper(getChildByBadgeController));
 
 router.post(
   '/create',
+  upload.single('avatarUrl'),
   validateBody(childSchemaJoi),
   ctrlWrapper(createChildController),
 );

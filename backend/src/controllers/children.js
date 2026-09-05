@@ -2,19 +2,37 @@ import {
   createChildService,
   getChildByBadgeService,
 } from '../services/children.js';
+import { getEnvVar } from '../utils/getEnvVar.js';
+import { saveFileToCloudinary } from '../utils/saveFileToCloudinary.js';
+import { saveFileToUploadDir } from '../utils/saveFileToUploadDir.js';
 
 // CREATE
 
 export const createChildController = async (req, res) => {
   try {
-    const parentId = req.user.id; // якщо ти використовуєш auth middleware
+    const parentId = req.user.id;
+
     const data = req.body;
 
-    const child = await createChildService(parentId, data);
+    const photo = req.file;
+    let photoUrl;
+
+    if (photo) {
+      if (getEnvVar('ENABLE_CLOUDINARY') === 'true') {
+        photoUrl = await saveFileToCloudinary(photo);
+      } else {
+        photoUrl = await saveFileToUploadDir(photo);
+      }
+    }
+
+    const result = await createChildService(parentId, {
+      ...data,
+      avatarUrl: photoUrl,
+    });
 
     res.status(201).json({
       message: 'Child created',
-      child,
+      result,
     });
   } catch (error) {
     console.error('Error creating child:', error);

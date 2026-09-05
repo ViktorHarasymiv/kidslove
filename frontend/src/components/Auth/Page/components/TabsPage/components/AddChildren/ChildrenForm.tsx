@@ -82,7 +82,7 @@ export default function ChildrenForm({ badgeId, onSubmit }: Props) {
     form.medicalNotes.forEach((m, i) => fd.append(`medicalNotes[${i}]`, m));
 
     if (avatarFile) {
-      fd.append("avatar", avatarFile);
+      fd.append("avatarUrl", avatarFile);
     }
 
     for (const [key, value] of fd.entries()) {

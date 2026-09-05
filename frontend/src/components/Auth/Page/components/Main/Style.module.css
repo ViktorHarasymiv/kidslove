@@ -72,9 +72,6 @@
   margin-bottom: 20px;
 }
 
-.form_block {
-}
-
 /* PHOTO PICKER */
 
 .avatar_block {
@@ -124,4 +121,56 @@
   align-items: end;
 
   justify-content: space-between;
+}
+
+.child_list {
+  display: flex;
+  flex-direction: column;
+
+  gap: 14px;
+}
+
+.child_item {
+  padding: 16px;
+
+  border: 1px solid rgba(38, 38, 38, 0.15);
+
+  border-radius: 20px;
+}
+
+.child_info_wrapper {
+  display: flex;
+  gap: 14px;
+}
+
+.child_avatar {
+  width: 66px;
+  height: 66px;
+}
+
+.child_details {
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 4px;
+}
+
+.details_wrapper {
+  display: flex;
+  flex-direction: row;
+
+  gap: 4px;
+}
+.details_wrapper p {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-size: 12px;
+}
+
+.child_details a {
+  font-size: 12px;
+  color: var(--head-background-color);
+  text-decoration: underline;
 }
