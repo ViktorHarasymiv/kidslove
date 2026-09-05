@@ -1,16 +1,15 @@
-.MuiInputBase-root-MuiOutlinedInput-root-MuiSelect-root {
+.MuiSelect-root {
   border-radius: 25px !important;
 }
 
-.MuiFormLabel-root-MuiInputLabel-root.Mui-focused {
+.MuiInputLabel-root.Mui-focused {
   color: var(--head-background-color) !important;
 }
 
-.MuiInputBase-root-MuiOutlinedInput-root-MuiSelect-root.Mui-focused
-  .MuiOutlinedInput-notchedOutline {
+.Mui-focused .MuiOutlinedInput-notchedOutline {
   border-color: var(--head-background-color) !important;
 }
 
-.MuiSvgIcon-root-MuiNativeSelect-root-MuiSelect-icon {
+.MuiNativeSelect-root-MuiSelect-icon {
   color: var(--head-background-color) !important;
 }

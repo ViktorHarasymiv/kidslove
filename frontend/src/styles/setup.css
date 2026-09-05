@@ -186,6 +186,11 @@ svg {
   .button_link:hover {
     background-color: var(--secound-color);
     color: var(--head-background-color);
+
+    border-color: var(--opacity-color-dark);
+  }
+  .button_link:active {
+    transform: scale(0.97);
   }
 
   .tab_link:hover {
@@ -197,8 +202,6 @@ svg {
 
 @media (hover: none) and (pointer: coarse) {
   .button_link:active {
-    background-color: var(--head-color);
-    color: var(--head-background-color);
     transform: scale(0.97);
   }
   .tab_link:active {

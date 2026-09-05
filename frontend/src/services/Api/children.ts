@@ -8,3 +8,12 @@ export const getChildrenByBadge = async (badgeId: string) => {
 
   return res.data.children; // масив
 };
+
+// CHILDREN PHOTO
+
+export const uploadImageChildren = async (file: File): Promise<string> => {
+  const formData = new FormData();
+  formData.append("file", file);
+  const { data } = await axios.post(`${API_URL}/children/upload`, formData);
+  return data.url;
+};

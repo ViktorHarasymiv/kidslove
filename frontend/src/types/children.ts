@@ -1,4 +1,5 @@
 export interface ChildFormValues {
+  _id?: string;
   name: string;
   age: number | "";
   allergies: string[];

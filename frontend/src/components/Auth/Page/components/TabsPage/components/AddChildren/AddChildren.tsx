@@ -2,21 +2,37 @@ import ChildrenForm from "./ChildrenForm";
 import { useAuthStore } from "../../../../../../../services/store/authStore";
 import axios from "axios";
 import { API_URL } from "../../../../../../../config/api";
-import type { ChildFormValues } from "../../../../../../../types/children";
 
 export default function AddChildren() {
   const { user } = useAuthStore();
 
-  const handleAddChild = async (values: ChildFormValues) => {
+  const handleAddChild = async (formData: FormData) => {
     try {
-      await axios.post(`${API_URL}/children/create`, values, {
-        withCredentials: true,
-      });
-      console.log(values);
+      const response = await axios.post(
+        `${API_URL}/children/create`,
+        formData,
+        {
+          withCredentials: true,
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        },
+      );
+
+      console.log("FormData sent:");
+      for (const [key, value] of formData.entries()) {
+        console.log(key, value);
+      }
+
       alert("Дитину додано");
+      return response.data;
     } catch (err) {
-      console.log(values);
       console.error("Помилка при додаванні дитини:", err);
+
+      console.log("FormData debug:");
+      for (const [key, value] of formData.entries()) {
+        console.log(key, value);
+      }
     }
   };
 
