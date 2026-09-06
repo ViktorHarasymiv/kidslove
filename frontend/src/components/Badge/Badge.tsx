@@ -5,13 +5,15 @@ import axios from "axios";
 import { useAuthStore } from "../../services/store/authStore";
 import IsBuyPage from "./components/isBuy";
 import IsActivated from "./components/IsActivated";
+import type { ChildFormValues } from "../../types/children";
 
 export interface BadgeResponse {
   status?:
     | "notFound"
     | "notPurchased"
     | "notActivated"
-    | "childMissing"
+    | "noChildren"
+    | "selectChild"
     | "ok"
     | "error"
     | "alreadyActive"
@@ -24,6 +26,12 @@ export interface BadgeResponse {
   isActive?: boolean;
 
   badgeId?: string;
+
+  // нове поле — активна дитина
+  activeChild?: ChildFormValues;
+
+  // нове поле — список дітей
+  children?: ChildFormValues[];
 }
 
 export default function Badge() {
@@ -79,7 +87,6 @@ export default function Badge() {
   }
 
   const { isBuy, isActive } = data;
-  console.log(data);
 
   // 4. Якщо авторизований і бейдж куплений, але не активований
 
@@ -97,10 +104,13 @@ export default function Badge() {
     return <IsActivated id={id} />;
   }
 
+  console.log(data);
+
   // 5. Інші стани
   return (
     <div>
       <h1>Badge ID: {id}</h1>
+      <h2>{data.activeChild?.name}</h2>
     </div>
   );
 }

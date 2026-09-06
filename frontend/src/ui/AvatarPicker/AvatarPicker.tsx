@@ -1,6 +1,9 @@
 import { useState, type ChangeEvent } from "react";
 import style from "./Style.module.css";
 
+import previewAvatar from "../../assets/icons/avatar.svg";
+import delete_ico from "../../assets/icons/delete.svg";
+
 type Props = {
   onChangePhoto: (file: File | null) => void;
   profilePhotoUrl?: string | null;
@@ -48,13 +51,7 @@ const AvatarPicker = ({ onChangePhoto, profilePhotoUrl }: Props) => {
     <div>
       <div className={style.picker}>
         {previewUrl && (
-          <img
-            src={previewUrl}
-            alt="Preview"
-            width={300}
-            height={300}
-            className={style.avatar}
-          />
+          <img src={previewUrl} alt="Preview" className={style.avatar} />
         )}
 
         <label
@@ -62,7 +59,8 @@ const AvatarPicker = ({ onChangePhoto, profilePhotoUrl }: Props) => {
             previewUrl ? `${style.wrapper} ${style.reload}` : style.wrapper
           }
         >
-          📷 Choose photo
+          <img src={previewAvatar} alt="Preview" className={style.avatar} />
+          <span>Dodaj zdjęcie</span>
           <input
             type="file"
             accept="image/*"
@@ -73,7 +71,7 @@ const AvatarPicker = ({ onChangePhoto, profilePhotoUrl }: Props) => {
 
         {previewUrl && (
           <button className={style.remove} onClick={handleRemove}>
-            ❌
+            <img src={delete_ico} alt="" />
           </button>
         )}
       </div>

@@ -121,6 +121,15 @@ export const deleteAccount = async () => {
   }
 };
 
+// UPLOAD PHOTO
+
+export const uploadUserPhoto = async (file: File): Promise<string> => {
+  const formData = new FormData();
+  formData.append("file", file);
+  const { data } = await axios.post(`${API_URL}/user/upload`, formData);
+  return data.url;
+};
+
 // GOOGLE
 
 // export const handleGoogleLogin = async () => {

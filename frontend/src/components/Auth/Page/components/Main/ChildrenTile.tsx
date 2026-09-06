@@ -11,7 +11,8 @@ import { useChildrenStore } from "../../../../../services/store/childrenStore";
 export default function ChildrenTile() {
   const { user } = useAuthStore();
 
-  const children = useChildrenStore((s) => s.children);
+  const { children, count, loading } = useChildrenStore();
+
   const loadChildren = useChildrenStore((s) => s.loadChildren);
 
   useEffect(() => {
@@ -26,6 +27,20 @@ export default function ChildrenTile() {
   }, []);
 
   if (!user) return;
+
+  const setActiveChild = async (childId: string) => {
+    await axios.patch(
+      `${API_URL}/badges/set-active-child`,
+      {
+        badgeId: user.activeBadgeId,
+        childId,
+      },
+      { withCredentials: true },
+    );
+
+    // Оновлюємо Zustand
+    useChildrenStore.getState().setActiveChild(childId);
+  };
 
   const handleBadgeSelect = async (badgeId: string) => {
     try {
@@ -47,7 +62,11 @@ export default function ChildrenTile() {
   return (
     <div className={style.child_wrapper}>
       <div className={style.head_wrapper}>
-        <h2>Moje dzieci</h2>
+        <div>
+          <h2>
+            Moje dzieci <span>{count}/2</span>
+          </h2>
+        </div>
         {/* BADGE SELECT */}
 
         <MuiDynamicSelect
@@ -58,28 +77,39 @@ export default function ChildrenTile() {
         />
       </div>
       <ul className={style.child_list}>
-        {children
-          ? children.map((item) => (
-              <li key={item._id} className={style.child_item}>
-                <div className={style.child_info_wrapper}>
-                  <img
-                    src={item.avatarUrl || ""}
-                    alt=""
-                    className={style.child_avatar}
-                  />
-                  <div className={style.child_details}>
-                    <h2>{item.name}</h2>
-                    <div className={style.details_wrapper}>
-                      <p>
-                        <span>Wiek</span> <span>{item.age}</span>
-                      </p>
-                    </div>
-                    <Link to={`/badge/${item.badgeId}`}>Przejdź do strony</Link>
+        {!loading &&
+          children &&
+          children.length > 0 &&
+          children.map((item) => (
+            <li
+              key={item._id}
+              className={style.child_item}
+              onClick={() => setActiveChild(item._id)}
+            >
+              <div className={style.child_info_wrapper}>
+                <img
+                  src={item.avatarUrl || ""}
+                  alt=""
+                  className={style.child_avatar}
+                />
+                <div className={style.child_details}>
+                  <h2>{item.name}</h2>
+                  <div className={style.details_wrapper}>
+                    <p>
+                      <span>Wiek</span> <span>{item.age}</span>
+                    </p>
                   </div>
+                  <Link to={`/badge/${item.badgeId}`}>Przejdź do strony</Link>
                 </div>
-              </li>
-            ))
-          : "Loading..."}
+              </div>
+            </li>
+          ))}
+
+        {!loading && children === null && (
+          <div>
+            <p>Brak informacji dla tego NFC</p>
+          </div>
+        )}
       </ul>
     </div>
   );

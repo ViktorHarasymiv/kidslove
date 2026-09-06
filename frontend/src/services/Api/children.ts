@@ -6,7 +6,7 @@ export const getChildrenByBadge = async (badgeId: string) => {
     withCredentials: true,
   });
 
-  return res.data.children; // масив
+  return res.data;
 };
 
 // CHILDREN PHOTO

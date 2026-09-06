@@ -11,6 +11,8 @@ interface Props {
 }
 
 export default function ChildrenForm({ badgeId, onSubmit }: Props) {
+  console.log(badgeId);
+
   const [form, setForm] = useState<ChildFormValues>({
     name: "",
     age: "",
@@ -76,7 +78,7 @@ export default function ChildrenForm({ badgeId, onSubmit }: Props) {
     fd.append("name", form.name);
     fd.append("age", String(form.age));
     fd.append("emergencyPhone", form.emergencyPhone);
-    fd.append("badgeId", form.badgeId || "");
+    fd.append("badgeId", badgeId || "");
 
     form.allergies.forEach((a, i) => fd.append(`allergies[${i}]`, a));
     form.medicalNotes.forEach((m, i) => fd.append(`medicalNotes[${i}]`, m));

@@ -3,7 +3,7 @@ import { ChildCollection } from '../db/models/children.js';
 import { UsersCollection } from '../db/models/user.js';
 import { setActiveBadge } from '../services/badge.js';
 
-// GET BADGE BY ID
+// GET BY ACTIVE CHILD
 
 export const getBadgeInfo = async (req, res) => {
   try {
@@ -22,7 +22,10 @@ export const getBadgeInfo = async (req, res) => {
     // 2. Перевірити покупку
     if (!badge.isBuy) {
       return res.json({
+        status: 'notPurchased',
         isBuy: badge.isBuy,
+        isActive: badge.active,
+        badgeId,
         message: 'Цей бейдж ще не куплений.',
       });
     }
@@ -30,33 +33,55 @@ export const getBadgeInfo = async (req, res) => {
     // 3. Перевірити активацію
     if (!badge.active) {
       return res.json({
-        badgeId,
-        isActive: badge.active,
+        status: 'notActivated',
         isBuy: badge.isBuy,
+        isActive: badge.active,
+        badgeId,
         message: 'Бейдж куплений, але ще не активований.',
       });
     }
 
-    // 4. Знайти дитину по badgeId
-    const child = await ChildCollection.findOne({ badgeId });
+    // 4. Отримати всіх дітей цього бейджа
+    const children = await ChildCollection.find({ badgeId });
 
-    if (!child) {
+    if (!children.length) {
       return res.json({
-        badgeId,
+        status: 'noChildren',
         isBuy: badge.isBuy,
         isActive: badge.active,
-        status: 'success',
+        badgeId,
+        children: [],
         message: 'Створіть дитину для цього бейджа.',
       });
     }
 
-    // 5. Повернути дані дитини
+    // 5. Якщо активна дитина встановлена
+    if (badge.activeChildId) {
+      const activeChild = children.find(
+        (c) => c._id.toString() === badge.activeChildId.toString(),
+      );
+
+      if (activeChild) {
+        return res.json({
+          status: 'ok',
+          isBuy: badge.isBuy,
+          isActive: badge.active,
+          badgeId,
+          activeChild,
+          children,
+          message: 'Активна дитина знайдена.',
+        });
+      }
+    }
+
+    // 6. Якщо активної дитини немає → показати список
     return res.json({
-      status: 'ok',
+      status: 'selectChild',
       isBuy: badge.isBuy,
       isActive: badge.active,
       badgeId,
-      child: child,
+      children,
+      message: 'Виберіть активну дитину.',
     });
   } catch (err) {
     console.error(err);
@@ -158,3 +183,58 @@ export async function setActiveBadgeController(req, res) {
     return res.status(500).json({ message: 'Server error' });
   }
 }
+
+// SET ACTIVE CHILD
+
+export const setActiveChild = async (req, res) => {
+  try {
+    const { badgeId, childId } = req.body;
+    const userId = req.user.id;
+
+    // 1. Знайти бейдж
+    const badge = await BadgeCollection.findOne({ badgeId });
+
+    if (!badge) {
+      return res.status(404).json({
+        status: 'notFound',
+        message: 'Бейдж не знайдено',
+      });
+    }
+
+    // 2. Перевірити власника
+    if (badge.ownerId.toString() !== userId.toString()) {
+      return res.status(403).json({
+        status: 'forbidden',
+        message: 'Це не ваш бейдж',
+      });
+    }
+
+    // 3. Перевірити, що дитина належить цьому бейджу
+    const child = await ChildCollection.findOne({
+      _id: childId,
+      badgeId: badgeId,
+    });
+
+    if (!child) {
+      return res.status(404).json({
+        status: 'childNotFound',
+        message: 'Дитину не знайдено або вона не належить цьому бейджу',
+      });
+    }
+
+    // 4. Записати активну дитину
+    badge.activeChildId = childId;
+    await badge.save();
+
+    return res.json({
+      status: 'ok',
+      activeChildId: childId,
+    });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({
+      status: 'error',
+      message: 'Помилка сервера',
+    });
+  }
+};

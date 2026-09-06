@@ -6,6 +6,7 @@ import {
   activateBadge,
   getBadgeInfo,
   setActiveBadgeController,
+  setActiveChild,
 } from '../controllers/badge.js';
 
 const router = Router();
@@ -16,5 +17,6 @@ router.use(authMiddleware);
 
 router.post('/activate', ctrlWrapper(activateBadge));
 router.post('/set-active-badge', ctrlWrapper(setActiveBadgeController));
+router.patch('/set-active-child', ctrlWrapper(setActiveChild));
 
 export default router;

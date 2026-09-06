@@ -131,11 +131,20 @@
 }
 
 .child_item {
+  cursor: pointer;
+
   padding: 16px;
 
   border: 1px solid rgba(38, 38, 38, 0.15);
-
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
   border-radius: 20px;
+
+  transition: all 0.1s ease-in;
+}
+
+.child_item:hover {
+  border-color: var(--head-background-color);
+  transform: scale(1.01);
 }
 
 .child_info_wrapper {
