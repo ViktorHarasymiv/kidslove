@@ -3,9 +3,12 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 import { API_URL } from "../../../config/api";
-import type { BadgeResponse } from "../Badge";
 
 import style from "./Style.module.css";
+import type {
+  ActivatedBadge,
+  ActivatedBadgePromise,
+} from "../../../types/badge";
 
 interface Props {
   id?: string;
@@ -18,9 +21,9 @@ export default function IsActivated({ id }: Props) {
   const activateBadge = async (
     badgeId: string,
     userInputCode: string,
-  ): Promise<BadgeResponse> => {
+  ): Promise<ActivatedBadgePromise> => {
     try {
-      const res = await axios.post<BadgeResponse>(
+      const res = await axios.post<ActivatedBadge>(
         `${API_URL}/badges/activate`,
         {
           badgeId,
@@ -28,6 +31,7 @@ export default function IsActivated({ id }: Props) {
         },
         { withCredentials: true },
       );
+      console.log(res);
 
       return res.data;
     } catch (err) {

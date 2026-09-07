@@ -11,3 +11,18 @@ export interface BadgeType {
   ownerId: string; // parent ObjectId
   activeChildId: string | null; // ID of active child
 }
+
+export interface ActivatedBadge {
+  data: {
+    badgeId: string;
+    message: string;
+    status: string;
+  };
+  status: string;
+  message: string;
+}
+
+export interface ActivatedBadgePromise {
+  status: string;
+  message: string;
+}
