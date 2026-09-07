@@ -7,9 +7,13 @@ import style from "./Style.module.css";
 import { API_URL } from "../../../../../config/api";
 import axios from "axios";
 import { useChildrenStore } from "../../../../../services/store/childrenStore";
+import CustomRadio from "../../../../../ui/CustomRadio/CustomRadio";
+import { useBadgeStore } from "../../../../../services/store/useBadgeStore";
+import { getBadgeById } from "../../../../../services/Api/badge";
 
 export default function ChildrenTile() {
   const { user } = useAuthStore();
+  const { setBadgeData, setActiveChildId, activeChildId } = useBadgeStore();
 
   const { children, count, loading } = useChildrenStore();
 
@@ -21,6 +25,9 @@ export default function ChildrenTile() {
       if (!activeBadgeId) return; // якщо немає — не робимо запит
 
       await loadChildren(activeBadgeId);
+      await getBadgeById(activeBadgeId).then((res) => {
+        setBadgeData(res);
+      });
     };
 
     loadChildrenEffect();
@@ -39,7 +46,9 @@ export default function ChildrenTile() {
     );
 
     // Оновлюємо Zustand
-    useChildrenStore.getState().setActiveChild(childId);
+    useChildrenStore.getState().setActiveChild(childId); // Завантажуємо обрану дитину
+
+    setActiveChildId(childId); // Оновлюєм ід обраної дитини
   };
 
   const handleBadgeSelect = async (badgeId: string) => {
@@ -54,10 +63,15 @@ export default function ChildrenTile() {
       store.setActiveBadge(badgeId);
 
       await loadChildren(badgeId);
+      await getBadgeById(badgeId).then((res) => {
+        setBadgeData(res);
+      });
     } catch (err) {
       console.error("Помилка при встановленні активного бейджа:", err);
     }
   };
+
+  let checkCurrentChild;
 
   return (
     <div className={style.child_wrapper}>
@@ -68,7 +82,6 @@ export default function ChildrenTile() {
           </h2>
         </div>
         {/* BADGE SELECT */}
-
         <MuiDynamicSelect
           label="Moje NFC"
           options={user.badges}
@@ -76,34 +89,52 @@ export default function ChildrenTile() {
           value={user.activeBadgeId || ""}
         />
       </div>
+      {/* CHILDREN LIST */}
       <ul className={style.child_list}>
         {!loading &&
           children &&
           children.length > 0 &&
-          children.map((item) => (
-            <li
-              key={item._id}
-              className={style.child_item}
-              onClick={() => setActiveChild(item._id)}
-            >
-              <div className={style.child_info_wrapper}>
-                <img
-                  src={item.avatarUrl || ""}
-                  alt=""
-                  className={style.child_avatar}
-                />
-                <div className={style.child_details}>
-                  <h2>{item.name}</h2>
-                  <div className={style.details_wrapper}>
-                    <p>
-                      <span>Wiek</span> <span>{item.age}</span>
-                    </p>
+          children.map((item) => {
+            checkCurrentChild = activeChildId === item._id;
+
+            return (
+              <li key={item._id} className={style.child_item}>
+                <div className={style.child_info_wrapper}>
+                  <img
+                    src={item.avatarUrl || ""}
+                    alt="Children avatar"
+                    className={style.child_avatar}
+                  />
+                  <div className={style.child_details}>
+                    <h2>{item.name}</h2>
+                    <div className={style.details_wrapper}>
+                      <p>
+                        <span>Wiek</span> <span>{item.age}</span>
+                      </p>
+                    </div>
+
+                    <div className={style.child_details}>
+                      <div className={style.details_wrapper}>
+                        <CustomRadio
+                          onChange={() => setActiveChild(item._id)}
+                          checked={checkCurrentChild}
+                        />
+                        <div className={style.link_wrapper}>
+                          <p>Wyświetl na stronie</p>
+                          {checkCurrentChild && (
+                            <Link to={`/badge/${item.badgeId}`}>
+                              Przejdź do strony
+                            </Link>
+                          )}
+                        </div>
+                      </div>
+                      <div></div>
+                    </div>
                   </div>
-                  <Link to={`/badge/${item.badgeId}`}>Przejdź do strony</Link>
                 </div>
-              </div>
-            </li>
-          ))}
+              </li>
+            );
+          })}
 
         {!loading && children === null && (
           <div>

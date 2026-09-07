@@ -1,4 +1,3 @@
-// services/store/childrenStore.ts
 import { create } from "zustand";
 import type { ChildState } from "../../types/children";
 import { getChildrenByBadge } from "../Api/children";
@@ -9,8 +8,7 @@ type ChildrenState = {
 
   count: number;
 
-  loading: boolean; // ← глобальний loading
-  switching: boolean; // ← loading для перемикання активної дитини
+  loading: boolean;
 
   loadChildren: (badgeId: string) => Promise<void>;
   setActiveChild: (childId: string) => void;
@@ -19,18 +17,14 @@ type ChildrenState = {
 export const useChildrenStore = create<ChildrenState>((set, get) => ({
   children: null,
   activeChild: null,
-
   count: 0,
-
   loading: false,
-  switching: false,
 
   loadChildren: async (badgeId) => {
     try {
       set({ loading: true });
 
       const children = await getChildrenByBadge(badgeId);
-      console.log(children);
 
       set({
         children: children.data,
@@ -44,13 +38,10 @@ export const useChildrenStore = create<ChildrenState>((set, get) => ({
   },
 
   setActiveChild: (childId) => {
-    set({ switching: true });
-
     const child = get().children?.find((c) => c._id === childId) || null;
 
     set({
       activeChild: child,
-      switching: false,
     });
   },
 }));

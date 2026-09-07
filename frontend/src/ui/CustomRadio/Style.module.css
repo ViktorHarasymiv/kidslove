@@ -1,0 +1,27 @@
+.radio {
+  width: 20px;
+  height: 20px;
+  border: 1px solid #999;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+}
+
+.radio.active {
+  border-color: var(--head-background-color);
+}
+
+.circle {
+  width: 9px;
+  height: 9px;
+  background: transparent;
+  border-radius: 50%;
+  transition: all 0.2s ease;
+}
+
+.radio.active .circle {
+  background: var(--head-background-color);
+}

@@ -1,11 +1,11 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { API_URL } from "../../config/api";
-import axios from "axios";
 import { useAuthStore } from "../../services/store/authStore";
 import IsBuyPage from "./components/isBuy";
 import IsActivated from "./components/IsActivated";
-import type { ChildFormValues } from "../../types/children";
+import type { ChildState } from "../../types/children";
+import { useBadgeStore } from "../../services/store/useBadgeStore";
+import { getBadgeById } from "../../services/Api/badge";
 
 export interface BadgeResponse {
   status?:
@@ -22,71 +22,53 @@ export interface BadgeResponse {
 
   message?: string;
 
-  isBuy?: boolean;
-  isActive?: boolean;
+  isBuy: boolean;
+  isActive: boolean;
 
   badgeId?: string;
 
   // нове поле — активна дитина
-  activeChild?: ChildFormValues;
+  activeChild?: ChildState;
 
   // нове поле — список дітей
-  children?: ChildFormValues[];
+  children?: ChildState[];
 }
 
 export default function Badge() {
+  const { activeChild, badgeData, setBadgeData } = useBadgeStore();
+
+  console.log(badgeData);
+
   const navigation = useNavigate();
   const { id } = useParams();
-
   const { authorized, loading } = useAuthStore();
-  const [data, setData] = useState<BadgeResponse | null>(null);
-
-  // HTTPS
-
-  const getBadgeById = async (
-    id: string | undefined,
-  ): Promise<BadgeResponse> => {
-    try {
-      const res = await axios.get<BadgeResponse>(`${API_URL}/badges/${id}`, {
-        withCredentials: true,
-      });
-
-      return res.data;
-    } catch (err) {
-      console.error("Error fetching badge:", err);
-
-      return {
-        message: "Помилка при отриманні даних бейджа.",
-        isBuy: false,
-        isActive: false,
-      };
-    }
-  };
 
   // 1. Завантажуємо бейдж
   useEffect(() => {
-    getBadgeById(id).then(setData);
+    getBadgeById(id).then((res) => {
+      setBadgeData(res); // ← глобально зберігаємо
+    });
   }, [id]);
 
   // 2. Редірект логіки — тільки після loading === false
   useEffect(() => {
     if (loading) return; // чекаємо поки авторизація завантажиться
-    if (!data) return; // чекаємо поки бейдж завантажиться
+    if (!badgeData) return; // чекаємо поки бейдж завантажиться
 
-    const { isBuy, isActive } = data;
+    const { isBuy, isActive } = badgeData;
 
     // ❗ Редірект тільки після того, як authorized визначився
     if (!authorized && isBuy && !isActive) {
       navigation("/zaloguj-się");
     }
-  }, [authorized, loading, data]);
+  }, [authorized, loading, activeChild]);
 
   // 3. Поки все вантажиться — показуємо лоадер
-  if (loading || !data) {
+  if (loading || !badgeData) {
     return <div>Завантаження...</div>;
   }
 
-  const { isBuy, isActive } = data;
+  const { isBuy, isActive } = badgeData;
 
   // 4. Якщо авторизований і бейдж куплений, але не активований
 
@@ -104,13 +86,11 @@ export default function Badge() {
     return <IsActivated id={id} />;
   }
 
-  console.log(data);
-
   // 5. Інші стани
   return (
     <div>
       <h1>Badge ID: {id}</h1>
-      <h2>{data.activeChild?.name}</h2>
+      <h2>{activeChild?.name}</h2>
     </div>
   );
 }

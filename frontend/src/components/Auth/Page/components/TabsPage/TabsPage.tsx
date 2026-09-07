@@ -1,13 +1,11 @@
-import { useState } from "react";
 import Tabs from "./Tabs";
 import AddChildren from "./components/AddChildren/AddChildren";
 
 import style from "./Style.module.css";
-
-// TABS
+import { useTabAuthStore } from "../../../../../services/store/useTabAuthStore";
 
 export interface TabItem {
-  id: number | null;
+  id: number;
   tab: string;
 }
 
@@ -19,24 +17,20 @@ const tabs: TabItem[] = [
 ];
 
 export default function TabsPage() {
-  const [active, setActive] = useState(tabs[2].id);
+  const { activeTab } = useTabAuthStore();
 
   const renderTab = () => {
-    switch (active) {
-      // case 1:
-      //   return <ChildrenList />;
+    switch (activeTab) {
       case 2:
         return <AddChildren />;
-      // case 3:
-      //   return <BadgesList />;
       default:
-        return;
+        return null;
     }
   };
 
   return (
     <div className={style.tabs_section_wrapper}>
-      <Tabs setActive={setActive} active={active} tabs={tabs} />
+      <Tabs tabs={tabs} />
       {renderTab()}
     </div>
   );
