@@ -16,7 +16,7 @@ export const PushNotification = async () => {
   }
 
   // Якщо вже дозволено — нічого не робимо
-  // if (Notification.permission === "granted") return;
+  if (Notification.permission === "granted") return;
 
   // Якщо permission = default → показуємо confirm
   const allow = window.confirm(

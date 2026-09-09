@@ -21,3 +21,16 @@ export const getBadgeById = async (
     };
   }
 };
+
+export const scanBadgeRequest = async (badgeId: string | undefined) => {
+  try {
+    const res = await axios.get(`${API_URL}/push/scan/${badgeId}`, {
+      withCredentials: true,
+    });
+
+    return res;
+  } catch (err) {
+    console.log("scanBadgeRequest error:", err);
+    return null;
+  }
+};

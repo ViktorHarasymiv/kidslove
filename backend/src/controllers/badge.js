@@ -63,9 +63,6 @@ export const getBadgeInfo = async (req, res) => {
       );
 
       if (activeChild) {
-        // Логування + пуш
-        handleBadgeScan({ badge, req });
-        //
         return res.json({
           status: 'ok',
           isBuy: badge.isBuy,

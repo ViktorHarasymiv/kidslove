@@ -5,7 +5,7 @@ import IsBuyPage from "./components/isBuy";
 import IsActivated from "./components/IsActivated";
 import type { ChildState } from "../../types/children";
 import { useBadgeStore } from "../../services/store/useBadgeStore";
-import { getBadgeById } from "../../services/Api/badge";
+import { getBadgeById, scanBadgeRequest } from "../../services/Api/badge";
 
 export interface BadgeResponse {
   status?:
@@ -46,22 +46,28 @@ export default function Badge() {
   // 1. Завантажуємо бейдж
   useEffect(() => {
     getBadgeById(id).then((res) => {
-      setBadgeData(res); // ← глобально зберігаємо
+      setBadgeData(res);
     });
   }, [id]);
 
+  // 1.1 Пуш сповіщення
+  useEffect(() => {
+    if (!activeChild) return; // логіка виконується тільки коли дитина є
+
+    scanBadgeRequest(id);
+  }, [activeChild]);
+
   // 2. Редірект логіки — тільки після loading === false
   useEffect(() => {
-    if (loading) return; // чекаємо поки авторизація завантажиться
-    if (!badgeData) return; // чекаємо поки бейдж завантажиться
+    if (loading) return;
+    if (!badgeData) return;
 
     const { isBuy, isActive } = badgeData;
 
-    // ❗ Редірект тільки після того, як authorized визначився
     if (!authorized && isBuy && !isActive) {
       navigation("/zaloguj-się");
     }
-  }, [authorized, loading, activeChild]);
+  }, [authorized, loading, badgeData]);
 
   // 3. Поки все вантажиться — показуємо лоадер
   if (loading || !badgeData) {
