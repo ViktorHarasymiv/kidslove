@@ -25,6 +25,13 @@ const usersSchema = new Schema(
       default: [],
     },
 
+    // PUSH
+
+    pushSubscription: {
+      type: Object,
+      default: null,
+    },
+
     activeBadgeId: { type: String, default: null },
 
     // ============================================================

@@ -1,3 +1,5 @@
+import { API_URL } from "../../../config/api";
+
 export const PushNotification = async () => {
   if (!("Notification" in window)) return;
   if (!("serviceWorker" in navigator)) return;
@@ -14,7 +16,7 @@ export const PushNotification = async () => {
   }
 
   // Якщо вже дозволено — нічого не робимо
-  if (Notification.permission === "granted") return;
+  // if (Notification.permission === "granted") return;
 
   // Якщо permission = default → показуємо confirm
   const allow = window.confirm(
@@ -28,7 +30,7 @@ export const PushNotification = async () => {
 
   const registration = await navigator.serviceWorker.register("/sw.js");
 
-  const res = await fetch("/api/vapid-public-key");
+  const res = await fetch(`${API_URL}/push/vapid-public-key`);
   const { publicKey } = await res.json();
 
   const subscription = await registration.pushManager.subscribe({
@@ -36,9 +38,10 @@ export const PushNotification = async () => {
     applicationServerKey: publicKey,
   });
 
-  await fetch("/api/save-subscription", {
+  await fetch(`${API_URL}/push/save-subscription`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
+    credentials: "include",
     body: JSON.stringify(subscription),
   });
 };
