@@ -2,6 +2,7 @@ import { BadgeCollection } from '../db/models/badges.js';
 import { ChildCollection } from '../db/models/children.js';
 import { UsersCollection } from '../db/models/user.js';
 import { setActiveBadge } from '../services/badge.js';
+import { handleBadgeScan } from '../utils/handleBadgeScan.js';
 
 // GET BY ACTIVE CHILD
 
@@ -62,6 +63,9 @@ export const getBadgeInfo = async (req, res) => {
       );
 
       if (activeChild) {
+        // Логування + пуш
+        handleBadgeScan({ badge, req });
+        //
         return res.json({
           status: 'ok',
           isBuy: badge.isBuy,

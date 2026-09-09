@@ -4,17 +4,13 @@ import { Router } from 'express';
 import authRouter from './auth.js';
 import baigeRouter from './badges.js';
 import childrenRouter from './children.js';
-// import userRouter from './users.js';
-// import listingRouter from './listing.js';
-// import categoriesRouter from './categories.js';
+import pushRouter from './push.js';
 
 const router = Router();
 
 router.use('/auth', authRouter);
 router.use('/badges', baigeRouter);
 router.use('/children', childrenRouter);
-// router.use('/users', userRouter);
-// router.use('/listing', listingRouter);
-// router.use('/categories', categoriesRouter);
+router.use('/push', pushRouter);
 
 export default router;
