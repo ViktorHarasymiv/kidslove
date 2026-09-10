@@ -1,9 +1,0 @@
-{
-  "redirects": [
-    {
-      "source": "/api/:path*",
-      "destination": "https://kidslove.onrender.com/api/:path*"
-    },
-    { "source": "/(.*)", "destination": "/" }
-  ]
-}
