@@ -1,7 +1,12 @@
 export async function getCityFromGPS(lat, lon) {
   try {
     const res = await fetch(
-      `https://nominatim.openstreetmap.org/reverse?lat=${lat}&lon=${lon}&format=json`,
+      `https://nominatim.openstreetmap.org/reverse?lat=${lat}&lon=${lon}&format=json&addressdetails=1`,
+      {
+        headers: {
+          'User-Agent': 'kidslove-app/1.0 (contact: support@kidslove.app)',
+        },
+      },
     );
 
     const data = await res.json();

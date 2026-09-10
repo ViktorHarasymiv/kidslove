@@ -34,6 +34,8 @@ export const handleBadgeScan = async ({ badge, req, preciseLocation }) => {
       );
     }
 
+    console.log(accurateCity);
+
     const location = {
       accurate: {
         lat: preciseLocation?.lat || null,
