@@ -29,7 +29,7 @@ const usersSchema = new Schema(
 
     pushSubscription: {
       type: Object,
-      default: null,
+      default: [],
     },
 
     activeBadgeId: { type: String, default: null },

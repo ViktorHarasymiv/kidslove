@@ -4,14 +4,26 @@ import { BadgeCollection } from '../db/models/badges.js';
 
 export const saveSubscription = async (req, res) => {
   try {
-    const userId = req.user.id; // якщо authMiddleware додає user
+    const userId = req.user.id;
     const subscription = req.body;
 
-    console.log(req);
+    const user = await UsersCollection.findById(userId);
 
-    await UsersCollection.findByIdAndUpdate(userId, {
-      pushSubscription: subscription,
-    });
+    // Якщо масиву немає — створюємо
+    if (!Array.isArray(user.pushSubscription)) {
+      user.pushSubscription = [];
+    }
+
+    // Перевіряємо, чи така підписка вже існує
+    const exists = user.pushSubscription.some(
+      (sub) => sub.endpoint === subscription.endpoint,
+    );
+
+    // Якщо немає — додаємо
+    if (!exists) {
+      user.pushSubscription.push(subscription);
+      await user.save();
+    }
 
     res.json({ status: 'ok' });
   } catch (err) {
