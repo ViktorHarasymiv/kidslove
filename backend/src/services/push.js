@@ -24,8 +24,6 @@ export const handleBadgeScan = async ({ badge, req, preciseLocation }) => {
         }
       : null;
 
-    console.log(ipLocation);
-
     // 2. Точна геолокація (якщо юзер дав дозвіл)
     let accurateCity = null;
 
