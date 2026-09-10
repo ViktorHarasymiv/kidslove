@@ -3,6 +3,7 @@ import { ScanLogCollection } from '../db/models/scanLog.js';
 import webpush from '../utils/webpush.js';
 
 import geoip from 'geoip-lite';
+import { getCityFromGPS } from '../utils/getCityFromGPS.js';
 
 export const handleBadgeScan = async ({ badge, req, preciseLocation }) => {
   try {
@@ -14,7 +15,7 @@ export const handleBadgeScan = async ({ badge, req, preciseLocation }) => {
 
     const geo = ip ? geoip.lookup(ip) : null;
 
-    const ipLocation = geo
+    const ipBased = geo
       ? {
           country: geo.country || null,
           city: geo.city || null,
@@ -26,17 +27,38 @@ export const handleBadgeScan = async ({ badge, req, preciseLocation }) => {
     console.log(ipLocation);
 
     // 2. Точна геолокація (якщо юзер дав дозвіл)
-    const accurateLocation = preciseLocation || null;
+    let accurateCity = null;
+
+    if (preciseLocation) {
+      accurateCity = await getCityFromGPS(
+        preciseLocation.lat,
+        preciseLocation.lon,
+      );
+    }
+
+    const location = {
+      accurate: {
+        lat: preciseLocation?.lat || null,
+        lon: preciseLocation?.lon || null,
+        accuracy: preciseLocation?.accuracy || null,
+        city: accurateCity?.city || null,
+        district: accurateCity?.district || null,
+        street: accurateCity?.street || null,
+      },
+      ipBased: {
+        country: ipBased?.country || null,
+        city: ipBased?.city || null,
+        lat: ipBased?.lat || null,
+        lon: ipBased?.lon || null,
+      },
+    };
 
     // 3. Логування сканування
     await ScanLogCollection.create({
       badgeId: badge.badgeId,
       ip,
       userAgent: req.headers['user-agent'],
-      location: {
-        accurate: accurateLocation,
-        ipBased: ipLocation,
-      },
+      location,
       scannedAt: new Date(),
     });
 
