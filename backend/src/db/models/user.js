@@ -28,7 +28,7 @@ const usersSchema = new Schema(
     // PUSH
 
     pushSubscription: {
-      type: Object,
+      type: Array,
       default: [],
     },
 

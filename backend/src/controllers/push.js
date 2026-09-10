@@ -7,6 +7,8 @@ export const saveSubscription = async (req, res) => {
     const userId = req.user.id;
     const subscription = req.body;
 
+    console.log(subscription);
+
     const user = await UsersCollection.findById(userId);
 
     // Якщо масиву немає — створюємо
@@ -18,6 +20,8 @@ export const saveSubscription = async (req, res) => {
     const exists = user.pushSubscription.some(
       (sub) => sub.endpoint === subscription.endpoint,
     );
+
+    console.log(exists);
 
     // Якщо немає — додаємо
     if (!exists) {
