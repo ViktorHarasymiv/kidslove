@@ -7,13 +7,16 @@ import { PushNotification } from "./PushNotification";
 import style from "./Style.module.css";
 
 export default function Profile() {
-  const { user } = useAuthStore();
+  const { user, authorized } = useAuthStore();
 
   useEffect(() => {
-    if (user) {
-      PushNotification();
-    }
-  }, [user]);
+    if (!authorized) return;
+    if (!user) return;
+
+    // 🔥 Якщо у юзера немає підписки — створюємо нову
+
+    PushNotification();
+  }, [authorized, user]);
 
   if (!user) return;
 

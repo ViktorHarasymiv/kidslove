@@ -12,7 +12,24 @@ export const handleBadgeScan = async ({ badge, req }) => {
 
     const parent = await UsersCollection.findById(badge.ownerId);
 
-    if (!parent?.pushSubscription) return;
+    const sub = parent.pushSubscription;
+
+    const isValidSubscription =
+      sub &&
+      typeof sub === 'object' &&
+      typeof sub.endpoint === 'string' &&
+      sub.endpoint.length > 0 &&
+      sub.keys &&
+      typeof sub.keys.p256dh === 'string' &&
+      sub.keys.p256dh.length > 0 &&
+      typeof sub.keys.auth === 'string' &&
+      sub.keys.auth.length > 0;
+
+    console.log(isValidSubscription);
+
+    if (!isValidSubscription) {
+      return;
+    }
 
     await webpush.sendNotification(
       parent.pushSubscription,

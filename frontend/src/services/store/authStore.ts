@@ -10,6 +10,7 @@ import {
 } from "../Api/auth.ts";
 
 import type { LoginValues, User } from "../../types/auth.ts";
+import { useBadgeStore } from "./useBadgeStore.ts";
 
 interface AuthState {
   user: User | null;
@@ -44,6 +45,12 @@ export const useAuthStore = create<AuthState>((set, get) => ({
     const res = await login(data);
     if (res) {
       set({ authorized: true });
+      useBadgeStore.setState({
+        badgeData: null,
+        badgeId: null,
+        activeChild: null,
+        activeChildId: null,
+      });
     }
   },
 

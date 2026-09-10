@@ -53,6 +53,7 @@ export default function Badge() {
   // 1.1 Пуш сповіщення
   useEffect(() => {
     if (!activeChild) return; // логіка виконується тільки коли дитина є
+    console.log(activeChild);
 
     scanBadgeRequest(id);
   }, [activeChild]);

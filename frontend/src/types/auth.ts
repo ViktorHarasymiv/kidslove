@@ -19,4 +19,5 @@ export interface User {
   createdAt: string;
   badges?: string[];
   activeBadgeId?: string | null;
+  pushSubscription?: object | null;
 }

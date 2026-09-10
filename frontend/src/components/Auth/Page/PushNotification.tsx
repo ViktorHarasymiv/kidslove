@@ -15,19 +15,22 @@ export const PushNotification = async () => {
     return;
   }
 
-  // Якщо вже дозволено — нічого не робимо
-  if (Notification.permission === "granted") return;
+  // Якщо permission = default → питаємо
+  if (Notification.permission === "default") {
+    const allow = window.confirm(
+      "Хочеш отримувати сповіщення, коли бейдж твоєї дитини буде скановано?",
+    );
 
-  // Якщо permission = default → показуємо confirm
-  const allow = window.confirm(
-    "Хочеш отримувати сповіщення, коли бейдж твоєї дитини буде скановано?",
-  );
+    if (!allow) return;
 
-  if (!allow) return;
+    const permission = await Notification.requestPermission();
 
-  const permission = await Notification.requestPermission();
-  if (permission !== "granted") return;
+    if (permission !== "granted") return;
+  }
 
+  // 🔥 Якщо ми тут — permission точно granted
+
+  // Тепер створюємо підписку (навіть якщо permission був granted раніше)
   const registration = await navigator.serviceWorker.register("/sw.js");
 
   const res = await fetch(`${API_URL}/push/vapid-public-key`);
