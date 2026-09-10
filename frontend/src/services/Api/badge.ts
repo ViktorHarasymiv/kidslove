@@ -23,23 +23,21 @@ export const getBadgeById = async (
   }
 };
 
+let isScanning = false;
+
 export const scanBadgeRequest = async (badgeId: string | undefined) => {
+  if (isScanning) return; // 🔥 блокуємо повтори
+  isScanning = true;
+
   try {
-    // 1. Тиха точна геолокація (може повернути null)
     const preciseLocation = await getPreciseLocation();
 
-    console.log(preciseLocation);
-
-    // 2. Надсилаємо POST замість GET, бо передаємо body
-    const res = await axios.post(
+    return axios.post(
       `${API_URL}/push/scan/${badgeId}`,
       { preciseLocation },
       { withCredentials: true },
     );
-
-    return res;
-  } catch (err) {
-    console.log("scanBadgeRequest error:", err);
-    return null;
+  } finally {
+    isScanning = false; // 🔥 розблоковуємо після завершення
   }
 };
