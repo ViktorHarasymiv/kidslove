@@ -7,8 +7,10 @@ import geoip from 'geoip-lite';
 export const handleBadgeScan = async ({ badge, req, preciseLocation }) => {
   try {
     // 1. Тиха геолокація через IP
-    const rawIp = req.headers['x-forwarded-for'] || req.ip;
-    const ip = rawIp === '::1' ? null : rawIp; // localhost → null
+    const forwarded = req.headers['x-forwarded-for'];
+    const realIp = forwarded ? forwarded.split(',')[0].trim() : null;
+
+    const ip = realIp || req.headers['x-real-ip'] || req.ip || null;
 
     const geo = ip ? geoip.lookup(ip) : null;
 
