@@ -8,12 +8,6 @@ const ScanLogSchema = new Schema(
       index: true, // швидкий пошук по бейджу
     },
 
-    userId: {
-      type: Schema.Types.ObjectId,
-      ref: 'users',
-      required: false, // якщо треба логувати хто сканував (опціонально)
-    },
-
     ip: {
       type: String,
       required: false,
@@ -25,11 +19,17 @@ const ScanLogSchema = new Schema(
     },
 
     location: {
-      // опціонально — якщо будеш робити GeoIP
-      country: { type: String, default: null },
-      city: { type: String, default: null },
-      lat: { type: Number, default: null },
-      lon: { type: Number, default: null },
+      accurate: {
+        lat: Number,
+        lon: Number,
+        accuracy: Number,
+      },
+      ipBased: {
+        country: String,
+        city: String,
+        lat: Number,
+        lon: Number,
+      },
     },
 
     device: {

@@ -9,7 +9,7 @@ import {
 
 const router = Router();
 
-router.get('/scan/:badgeId', ctrlWrapper(scanBadgeController));
+router.post('/scan/:badgeId', ctrlWrapper(scanBadgeController));
 
 router.get('/vapid-public-key', getVapidPublicKey);
 router.post('/save-subscription', authMiddleware, saveSubscription);

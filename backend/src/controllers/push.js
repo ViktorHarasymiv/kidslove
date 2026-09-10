@@ -7,8 +7,6 @@ export const saveSubscription = async (req, res) => {
     const userId = req.user.id;
     const subscription = req.body;
 
-    console.log(subscription);
-
     const user = await UsersCollection.findById(userId);
 
     // Якщо масиву немає — створюємо
@@ -20,9 +18,6 @@ export const saveSubscription = async (req, res) => {
     const exists = user.pushSubscription.some(
       (sub) => sub.endpoint === subscription.endpoint,
     );
-
-    console.log(exists);
-
     // Якщо немає — додаємо
     if (!exists) {
       user.pushSubscription.push(subscription);
@@ -43,6 +38,7 @@ export const getVapidPublicKey = (req, res) => {
 };
 
 export const scanBadgeController = async (req, res) => {
+  console.log(req);
   try {
     const badgeId = req.params.badgeId;
     const badge = await BadgeCollection.findOne({ badgeId });
@@ -51,7 +47,9 @@ export const scanBadgeController = async (req, res) => {
       return res.status(404).json({ error: 'Badge not found' });
     }
 
-    await handleBadgeScan({ badge, req });
+    const preciseLocation = req.body.preciseLocation || null;
+
+    await handleBadgeScan({ badge, req, preciseLocation });
 
     res.json({ status: 'scanned' });
   } catch (err) {
