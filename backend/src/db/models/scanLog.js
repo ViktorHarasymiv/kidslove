@@ -23,6 +23,10 @@ const ScanLogSchema = new Schema(
         lat: Number,
         lon: Number,
         accuracy: Number,
+
+        city: String,
+        district: String,
+        street: String,
       },
       ipBased: {
         country: String,

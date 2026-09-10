@@ -38,7 +38,6 @@ export const getVapidPublicKey = (req, res) => {
 };
 
 export const scanBadgeController = async (req, res) => {
-  console.log(req);
   try {
     const badgeId = req.params.badgeId;
     const badge = await BadgeCollection.findOne({ badgeId });
