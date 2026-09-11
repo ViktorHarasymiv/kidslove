@@ -218,8 +218,10 @@ export default function ChildrenForm({ badgeId, onSubmit }: Props) {
           </div>
           {/* PHOTO PICKER */}
 
-          <div className="input_block">
-            <AddPhoto onChange={handlePhotoChange} preview={form.avatarUrl} />
+          <div className={style.secound_column}>
+            <div className="input_block">
+              <AddPhoto onChange={handlePhotoChange} preview={form.avatarUrl} />
+            </div>
           </div>
         </div>
 

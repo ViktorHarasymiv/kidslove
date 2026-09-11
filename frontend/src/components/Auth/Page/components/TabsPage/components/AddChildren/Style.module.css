@@ -3,7 +3,7 @@
   flex-direction: column;
   justify-content: space-between;
 
-  padding: 40px;
+  padding: 28px 20px;
   background-color: var(--secound-color);
   border-radius: 60px;
 }
@@ -24,11 +24,16 @@
 }
 
 .first_column {
+  max-width: 524px;
   display: flex;
   flex-direction: column;
   gap: 18px;
 
   flex: 1;
+}
+
+.secound_column {
+  margin: auto;
 }
 
 .block_title {
@@ -88,7 +93,7 @@
 @media screen and (min-width: 767px) {
   .form_wrapper {
     flex-direction: row;
-    gap: 160px;
+    gap: 80px;
   }
 
   .form_block {
@@ -96,6 +101,12 @@
   }
 
   .wrapper {
+    padding: 40px;
     flex-direction: row;
+  }
+
+  .secound_column {
+    margin: 0;
+    margin-left: auto;
   }
 }

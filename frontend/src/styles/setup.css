@@ -97,8 +97,6 @@ svg {
 /* BUTTON LINK */
 
 .button_link {
-  max-width: fit-content;
-
   padding: var(--padding-b);
 
   background-color: var(--head-background-color);
@@ -106,6 +104,10 @@ svg {
 
   border: var(--border-b);
   border-radius: var(--border-radius-b);
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .disabled_button {

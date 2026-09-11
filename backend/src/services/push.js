@@ -3,7 +3,7 @@ import { ScanLogCollection } from '../db/models/scanLog.js';
 import webpush from '../utils/webpush.js';
 
 import geoip from 'geoip-lite';
-import { getCityFromGPS } from '../utils/getCityFromGPS.js';
+// import { getCityFromGPS } from '../utils/getCityFromGPS.js';
 
 export const handleBadgeScan = async ({ badge, req, preciseLocation }) => {
   try {
@@ -27,14 +27,12 @@ export const handleBadgeScan = async ({ badge, req, preciseLocation }) => {
     // 2. Точна геолокація (якщо юзер дав дозвіл)
     let accurateCity = null;
 
-    if (preciseLocation) {
-      accurateCity = await getCityFromGPS(
-        preciseLocation.lat,
-        preciseLocation.lon,
-      );
-    }
-
-    console.log(accurateCity);
+    // if (preciseLocation) {
+    //   accurateCity = await getCityFromGPS(
+    //     preciseLocation.lat,
+    //     preciseLocation.lon,
+    //   );
+    // }
 
     const location = {
       accurate: {

@@ -20,6 +20,8 @@
 
 .mobile_auth_wrapper {
   margin-top: auto;
+  display: flex;
+  flex-direction: column;
 }
 
 .mobile_auth_wrapper > * {
@@ -82,4 +84,10 @@
 
 .dark {
   color: var(--head-color);
+}
+
+@media screen and (min-width: 567px) {
+  .mobile_auth_wrapper {
+    flex-direction: row;
+  }
 }

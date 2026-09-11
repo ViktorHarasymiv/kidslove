@@ -16,7 +16,7 @@
   border-radius: 60px;
 }
 
-@media screen and (min-width: 627px) {
+@media screen and (min-width: 767px) {
   .main_wrapper {
     padding: 40px;
 
@@ -26,7 +26,7 @@
   }
 }
 
-@media screen and (min-width: 767px) {
+@media screen and (min-width: 1280px) {
   .main_wrapper {
     position: sticky;
     top: 20px;

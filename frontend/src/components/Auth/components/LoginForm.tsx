@@ -51,7 +51,7 @@ export default function LoginForm() {
           }
         }}
       >
-        {({ isSubmitting, errors }) => (
+        {({ isSubmitting, touched, errors }) => (
           <Form className={style.form_wrapper}>
             {/* EMAIL */}
             <div className="input_block">
@@ -63,7 +63,7 @@ export default function LoginForm() {
                 name="email"
                 type="email"
                 placeholder="E-mail"
-                className={`${errors.email ? "error_border" : ""} input`}
+                className={`${touched.email && errors.email ? "error_border" : ""} input`}
               />
               <ErrorMessage
                 name="email"
@@ -81,7 +81,7 @@ export default function LoginForm() {
                 name="password"
                 type={viewPassword ? "name" : "password"}
                 placeholder="Hasło"
-                className={`${errors.password ? "error_border" : ""} input`}
+                className={`${touched.password && errors.password ? "error_border" : ""} input`}
               />
               <ErrorMessage
                 name="password"
