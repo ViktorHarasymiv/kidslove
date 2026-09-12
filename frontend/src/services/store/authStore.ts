@@ -47,7 +47,7 @@ export const useAuthStore = create<AuthState>((set, get) => ({
       set({ authorized: true });
       useBadgeStore.setState({
         badgeData: null,
-        badgeId: null,
+        badgeId: "",
         activeChild: null,
         activeChildId: null,
       });
