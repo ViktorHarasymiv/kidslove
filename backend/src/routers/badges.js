@@ -5,6 +5,7 @@ import { authMiddleware } from '../middlewares/authMiddleware.js';
 import {
   activateBadge,
   getBadgeInfo,
+  getBadgeLogs,
   setActiveBadgeController,
   setActiveChild,
 } from '../controllers/badge.js';
@@ -14,6 +15,8 @@ const router = Router();
 router.get('/:badgeId', ctrlWrapper(getBadgeInfo));
 
 router.use(authMiddleware);
+
+router.get('/logs/:badgeId', ctrlWrapper(getBadgeLogs));
 
 router.post('/activate', ctrlWrapper(activateBadge));
 router.post('/set-active-badge', ctrlWrapper(setActiveBadgeController));

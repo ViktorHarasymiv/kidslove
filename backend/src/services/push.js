@@ -3,6 +3,7 @@ import { ScanLogCollection } from '../db/models/scanLog.js';
 import webpush from '../utils/webpush.js';
 
 import geoip from 'geoip-lite';
+import parseUserAgent from '../utils/parseUserAgent.js';
 // import { getCityFromGPS } from '../utils/getCityFromGPS.js';
 
 export const handleBadgeScan = async ({ badge, req, preciseLocation }) => {
@@ -51,11 +52,15 @@ export const handleBadgeScan = async ({ badge, req, preciseLocation }) => {
       },
     };
 
+    const userAgent = req.headers['user-agent'];
+    const device = parseUserAgent(userAgent);
+
     // 3. Логування сканування
     await ScanLogCollection.create({
       badgeId: badge.badgeId,
       ip,
       userAgent: req.headers['user-agent'],
+      device,
       location,
       scannedAt: new Date(),
     });

@@ -5,7 +5,7 @@ import type { ChildState } from "../../types/children";
 interface BadgeState {
   badgeData: BadgeResponse | null;
   activeChild: ChildState | null;
-  badgeId: string | null;
+  badgeId: string;
   activeChildId: string | null;
 
   setBadgeData: (data: BadgeResponse) => void;
@@ -14,14 +14,14 @@ interface BadgeState {
 
 export const useBadgeStore = create<BadgeState>((set) => ({
   badgeData: null,
-  badgeId: null,
+  badgeId: "",
   activeChild: null,
   activeChildId: null,
 
   setBadgeData: (data) =>
     set({
       badgeData: data,
-      badgeId: data.badgeId || null,
+      badgeId: data.badgeId,
       activeChild: data.activeChild || null,
       activeChildId: data.activeChild?._id || null, // ← ВАЖЛИВО
     }),

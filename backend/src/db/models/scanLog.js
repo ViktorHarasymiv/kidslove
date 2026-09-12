@@ -37,7 +37,6 @@ const ScanLogSchema = new Schema(
     },
 
     device: {
-      // parsed userAgent (опціонально)
       os: { type: String, default: null },
       browser: { type: String, default: null },
       model: { type: String, default: null },
