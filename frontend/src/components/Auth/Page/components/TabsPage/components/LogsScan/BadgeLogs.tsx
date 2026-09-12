@@ -14,9 +14,5 @@ export function BadgeLogs() {
 
   console.log(data);
 
-  return (
-    <div>
-      <BadgeLogsTable logs={data.logs} />
-    </div>
-  );
+  return <BadgeLogsTable logs={data.logs} />;
 }

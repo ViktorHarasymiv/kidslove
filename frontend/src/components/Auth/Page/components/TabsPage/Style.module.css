@@ -1,6 +1,9 @@
 /* TAB */
 
 .tabs_section_wrapper {
+  overflow-x: auto; /* 🔥 горизонтальний скрол */
+  overflow-y: hidden;
+
   display: flex;
   flex-direction: column;
 

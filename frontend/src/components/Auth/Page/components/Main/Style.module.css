@@ -3,6 +3,7 @@
 
   max-width: 100%;
   width: 100%;
+
   height: fit-content;
 
   display: flex;
@@ -36,6 +37,8 @@
     justify-content: start;
 
     align-items: normal;
+
+    flex: 0 0 100%;
   }
 }
 

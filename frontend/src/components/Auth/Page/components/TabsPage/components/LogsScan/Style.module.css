@@ -1,0 +1,43 @@
+.table_wrapper {
+  overflow-x: auto;
+  overflow-y: hidden;
+}
+
+.table {
+  width: max-content;
+
+  border-collapse: separate;
+  border-spacing: 40px 30px;
+
+  border-radius: 60px;
+
+  background-color: var(--secound-color);
+}
+
+.thead {
+  margin-bottom: 5px;
+}
+
+/* Стилізація скролу */
+.table_wrapper::-webkit-scrollbar {
+  height: 6px; /* висота горизонтального скролу */
+}
+
+.table_wrapperl::-webkit-scrollbar-track {
+  border-radius: 4px;
+}
+
+.table_wrapper::-webkit-scrollbar-thumb {
+  background: var(--head-background-color);
+  border-radius: 4px;
+}
+
+.table_wrapper::-webkit-scrollbar-thumb:hover {
+  background: #999; /* колір при наведенні */
+}
+
+/* Для Firefox */
+.table-scroll {
+  scrollbar-width: thin;
+  scrollbar-color: var(--head-background-color);
+}
