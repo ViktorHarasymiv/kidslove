@@ -11,16 +11,16 @@ export function BadgeLogsTable({ logs }: Props) {
     <div className={style.table_wrapper}>
       <table className={style.table}>
         <thead className={style.thead}>
-          <tr className={style.tr}>
-            <th className="px-4 py-2 text-left">К-сть</th>
-            <th className="px-4 py-2 text-left">Дата</th>
-            <th className="px-4 py-2 text-left">IP</th>
-            <th className="px-4 py-2 text-left">Браузер</th>
-            <th className="px-4 py-2 text-left">OS</th>
-            <th className="px-4 py-2 text-left">Місто (GPS)</th>
-            <th className="px-4 py-2 text-left">Район (GPS)</th>
-            <th className="px-4 py-2 text-left">Вулиця (GPS)</th>
-            <th className="px-4 py-2 text-left">Місто (IP)</th>
+          <tr>
+            <th>Liczba</th>
+            <th>Data</th>
+            <th>IP</th>
+            <th>Przeglądarka</th>
+            <th>System</th>
+            <th>Miasto (GPS)</th>
+            <th>Dzielnica (GPS)</th>
+            <th>Ulica (GPS)</th>
+            <th>Miasto (IP)</th>
           </tr>
         </thead>
 

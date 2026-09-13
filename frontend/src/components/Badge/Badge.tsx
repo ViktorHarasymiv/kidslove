@@ -37,8 +37,6 @@ export interface BadgeResponse {
 export default function Badge() {
   const { activeChild, badgeData, setBadgeData } = useBadgeStore();
 
-  console.log(badgeData);
-
   const navigation = useNavigate();
   const { id } = useParams();
   const { authorized, loading } = useAuthStore();
@@ -52,10 +50,8 @@ export default function Badge() {
 
   // 1.1 Пуш сповіщення
   useEffect(() => {
-    if (!activeChild) return; // логіка виконується тільки коли дитина є
-
     scanBadgeRequest(id);
-  }, [activeChild]);
+  }, []);
 
   // 2. Редірект логіки — тільки після loading === false
   useEffect(() => {
@@ -92,11 +88,14 @@ export default function Badge() {
     return <IsActivated id={id} />;
   }
 
+  if (!activeChild) return;
+
   // 5. Інші стани
   return (
     <div>
       <h1>Badge ID: {id}</h1>
-      <h2>{activeChild?.name}</h2>
+      <h2>{activeChild.name}</h2>
+      <img src={activeChild.avatarUrl || ""} alt="" />
     </div>
   );
 }

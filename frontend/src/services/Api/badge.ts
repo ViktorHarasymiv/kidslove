@@ -23,21 +23,12 @@ export const getBadgeById = async (
   }
 };
 
-let isScanning = false;
-
 export const scanBadgeRequest = async (badgeId: string | undefined) => {
-  if (isScanning) return; // 🔥 блокуємо повтори
-  isScanning = true;
+  const preciseLocation = await getPreciseLocation();
 
-  try {
-    const preciseLocation = await getPreciseLocation();
-
-    return axios.post(
-      `${API_URL}/push/scan/${badgeId}`,
-      { preciseLocation },
-      { withCredentials: true },
-    );
-  } finally {
-    isScanning = false; // 🔥 розблоковуємо після завершення
-  }
+  return axios.post(
+    `${API_URL}/push/scan/${badgeId}`,
+    { preciseLocation },
+    { withCredentials: true },
+  );
 };
