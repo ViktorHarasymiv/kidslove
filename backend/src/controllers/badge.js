@@ -64,14 +64,20 @@ export const getBadgeInfo = async (req, res) => {
         (c) => c._id.toString() === badge.activeChildId.toString(),
       );
 
+      const parent = await UsersCollection.findOne(
+        { _id: badge.ownerId },
+        { name: 1, phone: 1, contactMethods: 1 }, // тільки публічні поля
+      );
+
       if (activeChild) {
         return res.json({
-          status: 'ok',
+          status: 200,
           isBuy: badge.isBuy,
           isActive: badge.active,
           badgeId,
           activeChild,
           children,
+          parent,
           message: 'Активна дитина знайдена.',
         });
       }

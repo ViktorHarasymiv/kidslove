@@ -1,5 +1,5 @@
 import ChildrenForm from "./ChildrenForm";
-import { useAuthStore } from "../../../../../../../services/store/authStore";
+import { useAuthStore } from "../../../../../../../store/authStore";
 import axios from "axios";
 import { API_URL } from "../../../../../../../config/api";
 

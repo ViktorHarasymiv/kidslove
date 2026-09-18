@@ -2,7 +2,7 @@ import "./styles/globals.css";
 import Router from "./Routes/Routes";
 import { useEffect } from "react";
 
-import { useAuthStore } from "./services/store/authStore.ts";
+import { useAuthStore } from "./store/authStore.ts";
 
 function App() {
   const { fetchUser } = useAuthStore();

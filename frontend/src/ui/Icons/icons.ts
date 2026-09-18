@@ -27,6 +27,8 @@ import {
   ChartSpline,
   ChevronsLeft,
   ChevronsRight,
+  Trash,
+  Link,
 } from "lucide-react";
 
 export const Icons = {
@@ -58,4 +60,6 @@ export const Icons = {
   databaseX: DatabaseX,
   business: BriefcaseBusiness,
   stats: ChartSpline,
+  trash: Trash,
+  link: Link,
 } as const;

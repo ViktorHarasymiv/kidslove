@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import style from "./Style.module.css";
-import { useAuthStore } from "../../../services/store/authStore";
+import { useAuthStore } from "../../../store/authStore";
 import AuthLayout from "./AuthLayout";
 
 interface Props {

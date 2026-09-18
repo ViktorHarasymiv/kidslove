@@ -139,12 +139,12 @@
 }
 
 .child_item {
-  cursor: pointer;
+  position: relative;
 
   padding: 16px;
 
   border: 1px solid rgba(38, 38, 38, 0.15);
-  box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+
   border-radius: 20px;
 
   transition: all 0.1s ease-in;
@@ -152,7 +152,6 @@
 
 .child_item:hover {
   border-color: var(--head-background-color);
-  transform: scale(1.01);
 }
 
 .child_info_wrapper {
@@ -172,9 +171,9 @@
 .child_details {
   overflow: hidden;
 
-  width: 100%;
-
   display: flex;
+
+  flex: 1;
 
   flex-direction: column;
 
@@ -214,4 +213,124 @@
   gap: 14px;
 
   flex: 1;
+}
+
+/* SETUP BUTTON */
+
+.setup_wrapper {
+  position: relative;
+
+  align-self: flex-start;
+}
+
+.custom_setup_btn {
+  cursor: pointer;
+
+  width: 16px;
+  height: 26px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.custom_setup_btn span {
+  cursor: pointer;
+
+  position: relative;
+
+  width: 4px;
+  height: 4px;
+
+  background-color: var(--head-background-color);
+
+  border-radius: 50%;
+}
+
+.custom_setup_btn span::after,
+.custom_setup_btn span::before {
+  position: absolute;
+
+  content: "";
+
+  right: 0;
+
+  width: 4px;
+  height: 4px;
+
+  background-color: var(--head-background-color);
+
+  border-radius: 50%;
+}
+
+.custom_setup_btn span::after {
+  top: -8px;
+}
+
+.custom_setup_btn span::before {
+  bottom: -8px;
+}
+
+.custom_setup_btn:hover {
+  transform: scale(1.1);
+}
+
+/* SETUP TILE */
+
+.setup_wrapper_tile {
+  z-index: 9999;
+  position: absolute;
+
+  top: 30px;
+  right: 0;
+
+  background-color: var(--secound-color);
+
+  border: 1px solid var(--input-basic);
+  border-radius: 4px;
+}
+
+.setup_list {
+  display: flex;
+  flex-direction: column;
+
+  gap: 6px;
+
+  font-weight: 600;
+  font-size: 12px;
+  text-wrap: nowrap;
+}
+
+.setup_list li {
+  cursor: pointer;
+
+  padding-inline: 16px;
+  padding-block: 10px;
+
+  display: flex;
+  align-items: center;
+
+  gap: 8px;
+}
+
+.setup_list li svg {
+  width: 14px;
+  height: 14px;
+}
+
+.setup_list li:hover {
+  background-color: var(--secound-background-color);
+}
+
+.setup_list li a {
+  display: flex;
+  align-items: center;
+
+  gap: 8px;
+}
+
+@media screen and (min-width: 567px) {
+  .setup_wrapper_tile {
+    right: 0px;
+  }
 }

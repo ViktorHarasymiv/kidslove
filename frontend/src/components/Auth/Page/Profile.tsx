@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { useAuthStore } from "../../../services/store/authStore";
+import { useAuthStore } from "../../../store/authStore";
 import Main from "./components/Main/Main";
 import TabsPage from "./components/TabsPage/TabsPage";
 import { PushNotification } from "./PushNotification";
@@ -13,7 +13,7 @@ export default function Profile() {
     if (!authorized) return;
     if (!user) return;
 
-    // 🔥 Якщо у юзера немає підписки — створюємо нову
+    // Якщо у юзера немає підписки — створюємо нову
 
     PushNotification();
   }, [authorized, user]);

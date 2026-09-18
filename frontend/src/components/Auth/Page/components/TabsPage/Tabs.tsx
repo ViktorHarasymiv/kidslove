@@ -1,4 +1,4 @@
-import { useTabAuthStore } from "../../../../../services/store/useTabAuthStore";
+import { useTabAuthStore } from "../../../../../store/useTabAuthStore";
 
 import type { TabItem } from "./TabsPage";
 

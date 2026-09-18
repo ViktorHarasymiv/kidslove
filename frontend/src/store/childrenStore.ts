@@ -1,6 +1,6 @@
 import { create } from "zustand";
-import type { ChildState } from "../../types/children";
-import { getChildrenByBadge } from "../Api/children";
+import type { ChildState } from "../types/children";
+import { getChildrenByBadge } from "../services/Api/children";
 
 type ChildrenState = {
   children: ChildState[] | null;

@@ -13,6 +13,9 @@ export function MuiDynamicSelect({ options, value, onChange, label }: Props) {
       {label && <InputLabel>{label}</InputLabel>}
 
       <Select
+        MenuProps={{
+          disableScrollLock: true,
+        }}
         value={value}
         label={label}
         onChange={(e) => onChange(e.target.value)}

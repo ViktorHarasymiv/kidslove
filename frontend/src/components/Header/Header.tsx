@@ -1,5 +1,7 @@
+import { Skeleton } from "@mui/material";
+
 import { useWindowWidth } from "../../hook/useWindowWidth";
-import { useAuthStore } from "../../services/store/authStore";
+import { useAuthStore } from "../../store/authStore";
 import AuthLayout from "./components/AuthLayout";
 import AuthList from "./components/AuthList";
 import Logo from "./components/Logo";
@@ -13,7 +15,7 @@ interface Props {
 
 export default function Header({ dark }: Props) {
   const width = useWindowWidth();
-  const { authorized } = useAuthStore();
+  const { authorized, loading } = useAuthStore();
 
   return (
     <header className={style.header}>
@@ -22,7 +24,20 @@ export default function Header({ dark }: Props) {
         {width > 1191 ? (
           <>
             <NavList dark={dark} />
-            {authorized ? <AuthLayout dark={dark} /> : <AuthList dark={dark} />}
+
+            {loading ? (
+              // ✔ Показуємо Skeleton поки authStore перевіряє токен
+              <div className="auth_skeleton">
+                <Skeleton width={127} height={50} />
+                <Skeleton width={211} height={50} />
+              </div>
+            ) : authorized ? (
+              // ✔ Авторизований
+              <AuthLayout dark={dark} />
+            ) : (
+              // ✔ Не авторизований
+              <AuthList dark={dark} />
+            )}
           </>
         ) : (
           <MobileMenu dark={dark} />

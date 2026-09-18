@@ -10,7 +10,7 @@ import { loginSchema } from "../../../../../validation/AuthValidation";
 import type { LoginValues } from "../../../../../types/auth";
 import { login } from "../../../../../services/Api/auth";
 
-import { useAuthStore } from "../../../../../services/store/authStore";
+import { useAuthStore } from "../../../../../store/authStore";
 
 export default function UserTile() {
   const { user, fetchUser } = useAuthStore();
@@ -28,15 +28,13 @@ export default function UserTile() {
   return (
     <div className={style.user_wrapper}>
       <div className={style.user_action_wrapper}>
-        <div>
-          <img
-            src={User}
-            width={80}
-            height={38}
-            alt="Set form block"
-            className={style.set_block}
-          />
-        </div>
+        <img
+          src={User}
+          width={80}
+          height={38}
+          alt="Set form block"
+          className={style.set_block}
+        />
         <img
           src={Edit}
           width={38}

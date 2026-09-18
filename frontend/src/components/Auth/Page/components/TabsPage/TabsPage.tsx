@@ -2,7 +2,7 @@ import Tabs from "./Tabs";
 import AddChildren from "./components/AddChildren/AddChildren";
 
 import style from "./Style.module.css";
-import { useTabAuthStore } from "../../../../../services/store/useTabAuthStore";
+import { useTabAuthStore } from "../../../../../store/useTabAuthStore";
 import { BadgeLogs } from "./components/LogsScan/BadgeLogs";
 
 export interface TabItem {

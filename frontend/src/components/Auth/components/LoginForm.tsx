@@ -9,7 +9,8 @@ import { useState } from "react";
 import { login } from "../../../services/Api/auth.ts";
 import type { LoginValues } from "../../../types/auth.ts";
 
-import { useAuthStore } from "../../../services/store/authStore.ts";
+import { useAuthStore } from "../../../store/authStore.ts";
+import { useSnackbarStore } from "../../../store/snackbarStore.ts";
 
 const initialLoginValues: LoginValues = {
   email: "",
@@ -19,6 +20,7 @@ const initialLoginValues: LoginValues = {
 
 export default function LoginForm() {
   const navigate = useNavigate();
+  const { showSnackbar } = useSnackbarStore.getState();
   const { fetchUser } = useAuthStore();
 
   const [viewPassword, setViewPassword] = useState(false);
@@ -43,6 +45,7 @@ export default function LoginForm() {
               const data = await fetchUser();
 
               if (data) {
+                showSnackbar("Witamy w systemie!", "success");
                 navigate("/profile");
               }
             }

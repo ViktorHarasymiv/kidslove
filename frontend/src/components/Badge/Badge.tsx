@@ -1,11 +1,12 @@
 import { useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { useAuthStore } from "../../services/store/authStore";
+import { useAuthStore } from "../../store/authStore";
 import IsBuyPage from "./components/isBuy";
 import IsActivated from "./components/IsActivated";
 import type { ChildState } from "../../types/children";
-import { useBadgeStore } from "../../services/store/useBadgeStore";
+import { useBadgeStore } from "../../store/useBadgeStore";
 import { getBadgeById, scanBadgeRequest } from "../../services/Api/badge";
+import Loader from "../../ui/Loader/Loader";
 
 export interface BadgeResponse {
   status?:
@@ -49,9 +50,9 @@ export default function Badge() {
   }, [id]);
 
   // 1.1 Пуш сповіщення
-  useEffect(() => {
-    scanBadgeRequest(id);
-  }, []);
+  // useEffect(() => {
+  //   scanBadgeRequest(id);
+  // }, []);
 
   // 2. Редірект логіки — тільки після loading === false
   useEffect(() => {
@@ -67,7 +68,7 @@ export default function Badge() {
 
   // 3. Поки все вантажиться — показуємо лоадер
   if (loading || !badgeData) {
-    return <div>Завантаження...</div>;
+    return <Loader mode="fullscreen" />;
   }
 
   const { isBuy, isActive } = badgeData;
@@ -89,6 +90,8 @@ export default function Badge() {
   }
 
   if (!activeChild) return;
+
+  console.log(badgeData);
 
   // 5. Інші стани
   return (

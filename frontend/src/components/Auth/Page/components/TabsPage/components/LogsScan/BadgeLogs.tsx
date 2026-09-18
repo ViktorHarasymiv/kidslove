@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useBadgeStore } from "../../../../../../../services/store/useBadgeStore";
+import { useBadgeStore } from "../../../../../../../store/useBadgeStore";
 import { Pagination } from "../../../../../../Pagination/Pagination";
 import { BadgeLogsTable } from "./BadgeLogsTable";
 import { useBadgeLogs } from "./useBadgeLogs";

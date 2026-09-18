@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { useAuthStore } from "../../../services/store/authStore";
+import { useAuthStore } from "../../../store/authStore";
 import { Icons } from "../../../ui/Icons/icons";
 import style from "./Style.module.css";
 

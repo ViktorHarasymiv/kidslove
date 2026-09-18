@@ -1,17 +1,24 @@
 // import { Link } from "react-router-dom";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { MuiDynamicSelect } from "../../../../../ui/Select/MuiDynamicSelect";
-import { useAuthStore } from "../../../../../services/store/authStore";
+import { useAuthStore } from "../../../../../store/authStore";
 
 import style from "./Style.module.css";
 import { API_URL } from "../../../../../config/api";
 import axios from "axios";
-import { useChildrenStore } from "../../../../../services/store/childrenStore";
+import { useChildrenStore } from "../../../../../store/childrenStore";
 import CustomRadio from "../../../../../ui/CustomRadio/CustomRadio";
-import { useBadgeStore } from "../../../../../services/store/useBadgeStore";
+import { useBadgeStore } from "../../../../../store/useBadgeStore";
 import { getBadgeById } from "../../../../../services/Api/badge";
+import { Skeleton } from "@mui/material";
+import SetupChildTile from "./SetupChildTile";
 
 export default function ChildrenTile() {
+  // LOCAL STATE
+
+  const [activeSetupId, setActiveSetupId] = useState<string | null>(null);
+
+  // API
   const { user } = useAuthStore();
   const { setBadgeData, setActiveChildId, activeChildId } = useBadgeStore();
 
@@ -91,6 +98,11 @@ export default function ChildrenTile() {
       </div>
       {/* CHILDREN LIST */}
       <ul className={style.child_list}>
+        {loading &&
+          [0, 1].map((_, i) => {
+            return <Skeleton key={i} className="children_skeleton" />;
+          })}
+
         {!loading &&
           children &&
           children.length > 0 &&
@@ -98,10 +110,20 @@ export default function ChildrenTile() {
             checkCurrentChild = activeChildId === item._id;
 
             return (
-              <li key={item._id} className={style.child_item}>
+              <li
+                key={item._id}
+                className={style.child_item}
+                style={{
+                  borderColor: checkCurrentChild
+                    ? "var(--head-background-color)"
+                    : "",
+                }}
+              >
                 <div className={style.child_info_wrapper}>
                   <img
                     src={item.avatarUrl || ""}
+                    width={66}
+                    height={66}
                     alt="Children avatar"
                     className={style.child_avatar}
                   />
@@ -112,7 +134,6 @@ export default function ChildrenTile() {
                         <span>Wiek</span> <span>{item.age}</span>
                       </p>
                     </div>
-
                     <div className={style.child_details}>
                       <div className={style.details_wrapper}>
                         <CustomRadio
@@ -123,13 +144,30 @@ export default function ChildrenTile() {
                           <p>Wyświetl na stronie</p>
                           {/* {checkCurrentChild && (
                             <Link to={`/badge/${item.badgeId}`}>
-                              Przejdź do strony
+                            Przejdź do strony
                             </Link>
-                          )} */}
+                            )} */}
                         </div>
                       </div>
-                      <div></div>
                     </div>
+                  </div>
+                  {/* SETUP ACTION */}
+                  <div className={style.setup_wrapper}>
+                    <button
+                      type="button"
+                      onClick={() =>
+                        setActiveSetupId(
+                          activeSetupId === item._id ? null : item._id,
+                        )
+                      }
+                      className={style.custom_setup_btn}
+                    >
+                      <span></span>
+                    </button>
+                    {/* MODAL */}
+                    {activeSetupId === item._id && (
+                      <SetupChildTile link={user.activeBadgeId} />
+                    )}
                   </div>
                 </div>
               </li>

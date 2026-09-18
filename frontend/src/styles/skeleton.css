@@ -1,0 +1,22 @@
+.auth_skeleton {
+  display: flex;
+  flex-direction: row;
+
+  flex-wrap: nowrap;
+  gap: 18px;
+
+  height: 100%;
+}
+
+.MuiSkeleton-root {
+  -webkit-transform: scale(1) !important;
+  -moz-transform: scale(1) !important;
+  -ms-transform: scale(1) !important;
+  transform: scale(1) !important;
+
+  border-radius: 60px !important;
+}
+
+.children_skeleton {
+  height: 123px !important;
+}

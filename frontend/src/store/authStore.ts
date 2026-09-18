@@ -7,9 +7,9 @@ import {
   logout,
   deleteAccount,
   refreshSession,
-} from "../Api/auth.ts";
+} from "../services/Api/auth.ts";
 
-import type { LoginValues, User } from "../../types/auth.ts";
+import type { LoginValues, User } from "../types/auth.ts";
 import { useBadgeStore } from "./useBadgeStore.ts";
 
 interface AuthState {

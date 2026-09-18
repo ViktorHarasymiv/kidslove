@@ -9,7 +9,7 @@ import Layout from "../components/Layout/Layout";
 import Login from "../components/Auth/components/Login";
 import Signup from "../components/Auth/components/Signup";
 import { AuthGuard } from "../components/AuthGuard/AuthGuard";
-import { useAuthStore } from "../services/store/authStore";
+import { useAuthStore } from "../store/authStore";
 import Profile from "../components/Auth/Page/Profile";
 import Badge from "../components/Badge/Badge";
 
