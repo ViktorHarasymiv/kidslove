@@ -12,17 +12,21 @@ export default function AuthLayout({ dark }: Props) {
 
   return (
     <div className={style.user_wrapper}>
-      <button type="button" onClick={() => getLogout()}>
+      <button
+        type="button"
+        onClick={() => getLogout()}
+        className={`button_link`}
+      >
         Wyloguj się
       </button>
-      <div className={style.user_avatar}>
-        <Icons.user />
-      </div>
       <Link
         to="/profile"
         className={`${style.user_info} ${dark ? style.dark : ""}`}
       >
-        {user?.name}
+        <div className={style.user_avatar}>
+          <Icons.user />
+        </div>
+        <span>{user?.name}</span>
       </Link>
     </div>
   );

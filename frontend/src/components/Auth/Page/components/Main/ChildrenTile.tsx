@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+// import { Link } from "react-router-dom";
 import { useEffect } from "react";
 import { MuiDynamicSelect } from "../../../../../ui/Select/MuiDynamicSelect";
 import { useAuthStore } from "../../../../../services/store/authStore";
@@ -121,11 +121,11 @@ export default function ChildrenTile() {
                         />
                         <div className={style.link_wrapper}>
                           <p>Wyświetl na stronie</p>
-                          {checkCurrentChild && (
+                          {/* {checkCurrentChild && (
                             <Link to={`/badge/${item.badgeId}`}>
                               Przejdź do strony
                             </Link>
-                          )}
+                          )} */}
                         </div>
                       </div>
                       <div></div>

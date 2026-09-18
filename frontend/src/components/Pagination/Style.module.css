@@ -1,0 +1,45 @@
+.pagination_wrapper {
+  margin-top: 44px;
+
+  display: flex;
+  align-self: center;
+
+  gap: 14px;
+}
+
+.action_btn {
+  padding: 8px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 25px;
+
+  color: var(--head-color);
+  background-color: var(--secound-color);
+}
+
+.action_btn:disabled {
+  cursor: no-drop;
+  opacity: 0.3;
+}
+
+.active {
+  color: var(--secound-color);
+  background-color: var(--head-background-color);
+}
+
+.action_btn span {
+  width: 20px;
+  height: auto;
+}
+
+.action_btn:hover {
+  transform: scale(1.02);
+}
+
+.page_count_wrapper {
+  display: inherit;
+  align-items: center;
+}

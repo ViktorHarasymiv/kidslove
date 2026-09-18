@@ -39,9 +39,11 @@ export interface BadgeScanLog {
 
 export interface BadgeLogsResponse {
   badgeId: string;
-  page: number;
-  limit: number;
-  total: number;
-  pages: number;
+  hasNextPage: boolean;
+  hasPreviousPage: boolean;
   logs: BadgeScanLog[];
+  page: number;
+  perPage: number;
+  totalItems: number;
+  totalPages: number;
 }

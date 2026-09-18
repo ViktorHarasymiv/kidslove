@@ -14,8 +14,8 @@ import {
   Puzzle,
   ChevronDown,
   ChevronUp,
-  MoveLeft,
-  MoveRight,
+  ChevronLeft,
+  ChevronRight,
   Smile,
   NotebookPen,
   Eye,
@@ -25,6 +25,8 @@ import {
   DatabaseX,
   BriefcaseBusiness,
   ChartSpline,
+  ChevronsLeft,
+  ChevronsRight,
 } from "lucide-react";
 
 export const Icons = {
@@ -43,8 +45,10 @@ export const Icons = {
   puzzle: Puzzle,
   chevronDown: ChevronDown,
   chevronUp: ChevronUp,
-  moveLeft: MoveLeft,
-  moveRight: MoveRight,
+  moveLeft: ChevronLeft,
+  moveRight: ChevronRight,
+  chevronsRight: ChevronsRight,
+  chevronsLeft: ChevronsLeft,
   smile: Smile,
   notebookPen: NotebookPen,
   view: Eye,

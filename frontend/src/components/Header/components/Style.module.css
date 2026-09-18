@@ -44,7 +44,7 @@
   display: flex;
   flex-wrap: wrap;
 
-  gap: 8px;
+  gap: 18px;
 }
 
 .user_avatar {
@@ -70,6 +70,8 @@
 .user_info {
   display: flex;
   align-items: center;
+
+  gap: 8px;
 
   font-weight: 700;
   font-size: 20px;

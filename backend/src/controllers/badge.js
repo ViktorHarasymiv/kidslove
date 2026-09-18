@@ -3,6 +3,7 @@ import { ChildCollection } from '../db/models/children.js';
 import { ScanLogCollection } from '../db/models/scanLog.js';
 import { UsersCollection } from '../db/models/user.js';
 import { setActiveBadge } from '../services/badge.js';
+import { calculatePaginationData } from '../utils/calculatePaginationData.js';
 import { handleBadgeScan } from '../utils/handleBadgeScan.js';
 
 // GET BY ACTIVE CHILD
@@ -249,7 +250,7 @@ export async function getBadgeLogs(req, res) {
 
     // Параметри пагінації
     const page = Number(req.query.page) || 1;
-    const limit = Number(req.query.limit) || 20;
+    const limit = Number(req.query.limit) || 5;
     const skip = (page - 1) * limit;
 
     if (!badgeId) {
@@ -271,6 +272,8 @@ export async function getBadgeLogs(req, res) {
     // Загальна кількість логів
     const total = await ScanLogCollection.countDocuments({ badgeId });
 
+    const paginationData = calculatePaginationData(total, limit, page);
+
     // Логи з пагінацією
     const logs = await ScanLogCollection.find({ badgeId })
       .sort({ scannedAt: -1 })
@@ -279,11 +282,8 @@ export async function getBadgeLogs(req, res) {
 
     return res.json({
       badgeId,
-      page,
-      limit,
-      total,
-      pages: Math.ceil(total / limit),
       logs,
+      ...paginationData,
     });
   } catch (err) {
     console.error('Error fetching badge logs:', err);

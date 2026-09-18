@@ -5,7 +5,7 @@ import { API_URL } from "../../config/api";
 export async function fetchBadgeLogs(
   badgeId: string,
   page: number = 1,
-  limit: number = 20,
+  limit: number = 5,
 ): Promise<BadgeLogsResponse> {
   const res = await axios.get<BadgeLogsResponse>(
     `${API_URL}/badges/logs/${badgeId}`,

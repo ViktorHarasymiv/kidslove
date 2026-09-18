@@ -1,6 +1,13 @@
+.log_page_wrapper {
+  display: flex;
+  flex-direction: column;
+}
+
 .table_wrapper {
   overflow-x: auto;
   overflow-y: hidden;
+
+  touch-action: pan-x;
 }
 
 .table {

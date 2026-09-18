@@ -26,6 +26,10 @@ body {
   flex: 1;
 }
 
+header {
+  margin-bottom: 32px;
+}
+
 main {
   flex: 1;
 }
