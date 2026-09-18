@@ -5,7 +5,7 @@ import IsBuyPage from "./components/isBuy";
 import IsActivated from "./components/IsActivated";
 import type { ChildState } from "../../types/children";
 import { useBadgeStore } from "../../store/useBadgeStore";
-import { getBadgeById, scanBadgeRequest } from "../../services/Api/badge";
+import { getBadgeById } from "../../services/Api/badge";
 import Loader from "../../ui/Loader/Loader";
 
 export interface BadgeResponse {

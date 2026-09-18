@@ -1,6 +1,6 @@
 import { create } from "zustand";
-import type { BadgeResponse } from "../../components/Badge/Badge";
-import type { ChildState } from "../../types/children";
+import type { BadgeResponse } from "../components/Badge/Badge";
+import type { ChildState } from "../types/children";
 
 interface BadgeState {
   badgeData: BadgeResponse | null;
